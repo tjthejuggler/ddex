@@ -42,7 +42,7 @@ def get_filtered_images(user_input):
 		print('1', data['text'])
 		#print('2', data['text']['tv_scale'])
 		for item in data['text']['text_prompts']:
-			if user_input in item:
+			if user_input.lower() in item.lower():
 				result = json.dumps(data['text']['text_prompts'])
 				images_path_list.append(data['path'])
 				images_prompt_list.append(result)
@@ -142,7 +142,7 @@ if __name__ == "__main__":
 	app = ExampleApp()
 	app.mainloop()
 
-#make a github from this
+
 #make capslock not matter
 #make search field selectable
 #move stuff over from google drive, and put all github stuff inside of it
