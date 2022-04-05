@@ -1,0 +1,2 @@
+it goes through every text file in the dirs and makes autocomplete and easy search/filter 
+even look in partials for ones that are uncomplete but in same collection

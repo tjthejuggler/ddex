@@ -1,0 +1,15 @@
+{
+  "name": "ddex",
+  "version": "1.0.0",
+  "description": "explorer for my Disco Diffusion pics",
+  "main": "text.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.0"
+  }
+}
