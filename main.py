@@ -5,6 +5,12 @@ import json
 import tkinter as tk
 from os.path import exists
 
+from profanity_filter import ProfanityFilter
+
+pf = ProfanityFilter()
+
+censored = True
+
 
 directory = './directories/'
 json_objects = []
@@ -13,10 +19,11 @@ for subdir, dirs, files in os.walk(directory):
 	for filename in files:    	
 		#if ends in .png and has_matching settings.txt file
 		this_path = os.path.join(subdir, filename)
-		print('**', this_path)
-		print(this_path[:-8]+'settings.txt')
+		#print('**', this_path)
+		#print(this_path[:-8]+'settings.txt')
 		if filename.endswith(".png") and exists(this_path[:-8]+'settings.txt'):			
 			with open(this_path[:-8]+'settings.txt', 'r') as f:
+				save = True
 				data = json.load(f)
 				text = f.read()
 				#create a json object
@@ -24,9 +31,17 @@ for subdir, dirs, files in os.walk(directory):
 					"path": this_path,
 					"text": data
 				}
-				json_objects.append(json_object)
-				print(filename)
-				print("\n")
+				for item in data['text_prompts']:
+					if censored and pf.is_profane(item):
+						print(item)
+						save = False
+				if save:
+					json_objects.append(json_object)
+					print(filename)
+					print("\n")
+print("Count:", len(json_objects))
+
+
 
 def get_filtered_images(user_input):
 	images_prompt_list = []
@@ -35,6 +50,9 @@ def get_filtered_images(user_input):
 		print('1', data['text'])
 		#print('2', data['text']['tv_scale'])
 		for item in data['text']['text_prompts']:
+
+
+
 			if user_input.lower() in item.lower():
 				result = json.dumps(data['text']['text_prompts'])
 				images_path_list.append(data['path'])
@@ -60,7 +78,7 @@ class ExampleApp(tk.Tk):
 			self.text.insert("end", "this is line %s\n" % n)
 		self.user_text = tk.StringVar()
 		def callback(*args):
-			print(self.user_text.get())
+			#print(self.user_text.get())
 			self.text.delete('1.0', tk.END)
 			self.images_path_list, self.image_prompts = get_filtered_images(self.user_text.get())
 			for ind,prompt in enumerate(self.image_prompts):
@@ -71,7 +89,7 @@ class ExampleApp(tk.Tk):
 		self.user_text.trace_add('write', callback)            
 		self.user_entry = tk.Entry(self, bd =5, textvariable=self.user_text)
 		self.user_entry.pack(side="bottom", fill="x")
-		self.img = tk.PhotoImage(file='./directories/DiscoTime/DiscoTime(16)_0000.png')
+		self.img = tk.PhotoImage(file='./directories/DiscoTime(0)_0000.png')
 		self.preview = tk.Label(self, image=self.img)
 		self.preview.pack(side="bottom", fill="x")
 
@@ -93,10 +111,23 @@ if __name__ == "__main__":
 
 #make search field selectable
 	#dropdown that is full of all keys
-		#if it is number, then we should accept ranges
+		#if it is number, then we should accept ranges (30 - 50 should work
 
-#make same prompt items have # at the end of them	
+#make same prompt items have # at the end of them (maybe)
 
-#instead of looking for text files, i should look for completed files that have matching text files, and then i should add 
-#	their endings to the 
+#a way for me to rate my images
 
+#clean up code
+
+#something that creates prompts based on the other prompts that i have liked
+
+#organize prompt notes
+
+#scrape all artists/styles/modifier words
+
+#find a good ai for making sentences more descriptive, look into training them on prompts
+	#some sort of sentence enhancer for authors
+
+#i want to easily get the filename
+
+#i should be able to see everything else about the file when i click on it
