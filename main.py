@@ -1,32 +1,23 @@
 #in python loop through all text files in ./directories and all subdirectories and save each one as a json object
 import os
 import json
-
 import tkinter as tk
 from os.path import exists
-
 from profanity_filter import ProfanityFilter
 
 pf = ProfanityFilter()
-
-censored = True
-
-
+censored = False
 directory = './directories/'
 json_objects = []
 
 for subdir, dirs, files in os.walk(directory):
 	for filename in files:    	
-		#if ends in .png and has_matching settings.txt file
 		this_path = os.path.join(subdir, filename)
-		#print('**', this_path)
-		#print(this_path[:-8]+'settings.txt')
 		if filename.endswith(".png") and exists(this_path[:-8]+'settings.txt'):			
 			with open(this_path[:-8]+'settings.txt', 'r') as f:
-				save = True
+				use_this_image = True
 				data = json.load(f)
 				text = f.read()
-				#create a json object
 				json_object = {
 					"path": this_path,
 					"text": data
@@ -34,34 +25,25 @@ for subdir, dirs, files in os.walk(directory):
 				for item in data['text_prompts']:
 					if censored and pf.is_profane(item):
 						print(item)
-						save = False
-				if save:
+						use_this_image = False
+				if use_this_image:
 					json_objects.append(json_object)
 					print(filename)
 					print("\n")
+
 print("Count:", len(json_objects))
-
-
 
 def get_filtered_images(user_input):
 	images_prompt_list = []
 	images_path_list = []
 	for data in json_objects:
 		print('1', data['text'])
-		#print('2', data['text']['tv_scale'])
 		for item in data['text']['text_prompts']:
-
-
-
 			if user_input.lower() in item.lower():
 				result = json.dumps(data['text']['text_prompts'])
 				images_path_list.append(data['path'])
 				images_prompt_list.append(result)
-
 	images_path_list, images_prompt_list = (list(t) for t in zip(*sorted(zip(images_path_list, images_prompt_list))))
-
-	# images_prompt_list.sort()			
-	# images_path_list = [x for _,x in sorted(zip(images_prompt_list,images_path_list))]
 	return images_path_list, images_prompt_list
 
 class ExampleApp(tk.Tk):
@@ -72,18 +54,25 @@ class ExampleApp(tk.Tk):
 		self.status = tk.Label(self, anchor="w")
 		self.status.pack(side="bottom", fill="x")
 		self.text = tk.Text(self, wrap="word", width=400, height=10, cursor="xterm #0000FF")
+		self.text.configure(state="normal")
 		self.text.pack(fill="both", expand=True)
 		self.text.bind("<1>", self.on_text_button)
-		for n in range(1,20):
-			self.text.insert("end", "this is line %s\n" % n)
 		self.user_text = tk.StringVar()
+		self.images_path_list, self.image_prompts = get_filtered_images(self.user_text.get())
+		for ind,prompt in enumerate(self.image_prompts):
+			self.ending = '('+self.images_path_list[ind].split('(')[1]
+			self.text.insert("end", prompt + self.ending+'\n')
+		#self.text.configure(state="disabled")
+		
 		def callback(*args):
 			#print(self.user_text.get())
+			self.text.configure(state="normal")
 			self.text.delete('1.0', tk.END)
 			self.images_path_list, self.image_prompts = get_filtered_images(self.user_text.get())
-			for ind,prompt in enumerate(self.image_prompts):
-				self.text.insert("end", prompt + self.images_path_list[ind][-13]+'\n')
-				
+			for ind,prompt in enumerate(self.image_prompts):	
+				self.ending = '('+self.images_path_list[ind].split('(')[1]
+				self.text.insert("end", prompt + self.ending+'\n')
+			self.text.configure(state="disabled")
 			return True		
 
 		self.user_text.trace_add('write', callback)            
@@ -109,25 +98,3 @@ if __name__ == "__main__":
 	app = ExampleApp()
 	app.mainloop()
 
-#make search field selectable
-	#dropdown that is full of all keys
-		#if it is number, then we should accept ranges (30 - 50 should work
-
-#make same prompt items have # at the end of them (maybe)
-
-#a way for me to rate my images
-
-#clean up code
-
-#something that creates prompts based on the other prompts that i have liked
-
-#organize prompt notes
-
-#scrape all artists/styles/modifier words
-
-#find a good ai for making sentences more descriptive, look into training them on prompts
-	#some sort of sentence enhancer for authors
-
-#i want to easily get the filename
-
-#i should be able to see everything else about the file when i click on it

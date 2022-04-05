@@ -1,2 +1,37 @@
 it goes through every text file in the dirs and makes autocomplete and easy search/filter 
 even look in partials for ones that are uncomplete but in same collection
+
+
+#make search field selectable
+	#dropdown that is full of all keys
+		#if it is number, then we should accept ranges (30 - 50 should work
+
+#a way to add data to images(ratings..)
+#a way to see all data we have on an image
+
+
+
+#clean up code, rename and functionize
+
+make image be in seperate window
+
+
+#i should be able to see everything else about the file when i click on it
+
+
+PROMPT GEN
+
+	#see if there is a way to load from the json, if so then we can have something that randomly generates entire
+	# jsons to use
+
+	#prompt generator can be a combination of what things are getting good results and random words from out in
+	#	the world. Can probably hook this up to some gpt api
+
+	#scrape all artists/styles/modifier words
+
+	#find a good ai for making sentences more descriptive, look into training them on prompts
+		#some sort of sentence enhancer for authors
+
+MISC
+
+	#organize prompt notes
