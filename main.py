@@ -74,13 +74,21 @@ class ExampleApp(tk.Tk):
 				self.text.insert("end", prompt + self.ending+'\n')
 			self.text.configure(state="disabled")
 			return True		
+		self.user_text.trace_add('write', callback)      
 
-		self.user_text.trace_add('write', callback)            
 		self.user_entry = tk.Entry(self, bd =5, textvariable=self.user_text)
 		self.user_entry.pack(side="bottom", fill="x")
+
+		self.image_window= tk.Toplevel(self)
 		self.img = tk.PhotoImage(file='./directories/DiscoTime(0)_0000.png')
-		self.preview = tk.Label(self, image=self.img)
+		self.preview = tk.Label(self.image_window, image=self.img)
 		self.preview.pack(side="bottom", fill="x")
+
+		self.data_window= tk.Toplevel(self)
+
+		self.data = tk.Text(self.data_window, wrap="word", width=400, height=800, cursor="xterm #0000FF")
+
+		self.data.pack(side="bottom", fill="x")
 
 	def on_text_button(self, event):
 		index = self.text.index("@%s,%s" % (event.x, event.y))
@@ -90,9 +98,16 @@ class ExampleApp(tk.Tk):
 		path = self.images_path_list[int(line)]
 		self.status.configure(text=path)
 		self.img = tk.PhotoImage(file=path)
-		if self.img.width()>1200 or self.img.height()>800:
+		if self.img.width()>1920 or self.img.height()>800:
 			self.img = self.img.subsample(2)
 		self.preview.configure(image=self.img,borderwidth=4, relief="ridge")
+
+		for data_item in json_objects:
+			if data_item['path'] == path:
+				self.data.delete('1.0', tk.END)
+				image_data = data_item['text']
+				self.data.insert("end", json.dumps(image_data, indent=4, sort_keys=True))
+
 
 if __name__ == "__main__":
 	app = ExampleApp()

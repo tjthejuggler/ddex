@@ -1,6 +1,19 @@
 it goes through every text file in the dirs and makes autocomplete and easy search/filter 
 even look in partials for ones that are uncomplete but in same collection
 
+switch Text to Listbox
+   
+listbox = Listbox(root)  
+   
+listbox.insert(1,"Bread")  
+listbox.insert(2, "Milk")  
+listbox.insert(3, "Meat")  
+listbox.insert(4, "Cheese")
+listbox.insert(5, "Vegetables")  
+   
+listbox.pack()
+
+
 
 #make search field selectable
 	#dropdown that is full of all keys
@@ -8,8 +21,6 @@ even look in partials for ones that are uncomplete but in same collection
 
 #a way to add data to images(ratings..)
 #a way to see all data we have on an image
-
-
 
 #clean up code, rename and functionize
 
