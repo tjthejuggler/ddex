@@ -37,7 +37,7 @@ def get_filtered_images(user_input):
 	images_prompt_list = []
 	images_path_list = []
 	for data in json_objects:
-		print('1', data['text'])
+		#print('1', data['text'])
 		for item in data['text']['text_prompts']:
 			if user_input.lower() in item.lower():
 				result = json.dumps(data['text']['text_prompts'])
@@ -112,4 +112,25 @@ class ExampleApp(tk.Tk):
 if __name__ == "__main__":
 	app = ExampleApp()
 	app.mainloop()
+
+
+
+
+#this needs worked on
+	my_option_menu.configure(window, user_choice, *updated_list)
+
+from tkinter import *
+
+search_options = [list(myDict.keys())] #etc
+
+master = Tk()
+
+variable = StringVar(master)
+variable.set(search_options[0]) # default value
+
+w = OptionMenu(master, variable, *search_options)
+w.pack()
+
+
+mainloop()
 

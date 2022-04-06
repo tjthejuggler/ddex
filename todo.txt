@@ -14,6 +14,9 @@ listbox.insert(5, "Vegetables")
 listbox.pack()
 
 
+when dopdown item is selected, check to see if that item in sample is true/false, a number, or a string and set type of
+	filtering / input accordingly
+
 
 #make search field selectable
 	#dropdown that is full of all keys
@@ -31,9 +34,26 @@ make image be in seperate window
 
 
 PROMPT GEN
+	try this using example prompts with weights and seperated, if it doesnt work, then find some way to trick it
+		maybe just seperate things with periods and then use a replace('.', ':2","')
 
-	#see if there is a way to load from the json, if so then we can have something that randomly generates entire
-	# jsons to use
+	fill prompt and artist files
+		randomly choose some number of them (a different number of them for each generated prompts)
+	get artists and prompts from files, 
+	randomly choose number of artists, and how to refer to them (by, in the style of)
+
+	my input
+		begining
+		middle
+		end
+		general idea
+			(maybe like this) GPT3
+				happy - a prompt about happiness
+				clown - a prompt about clowns
+				...
+				user_prompt - 
+
+				
 
 	#prompt generator can be a combination of what things are getting good results and random words from out in
 	#	the world. Can probably hook this up to some gpt api
