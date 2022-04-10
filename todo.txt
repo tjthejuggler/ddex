@@ -66,3 +66,6 @@ PROMPT GEN
 MISC
 
 	#organize prompt notes
+
+
+16:9 2560,1440
