@@ -1,0 +1,49 @@
+todo
+
+continue checking new format thing for bugs and testing prompts
+
+
+get lots of great prompts
+eventually the artists can be put into categories
+	the ai could go out of its way to combine artists from various groups that should make interesting contrasts
+artstation variation
+	use deviantart
+	trending on
+	featured on
+artists into "in the style of"
+find out how to do gpt3 with a blank before it
+add new pics to ddex
+make ratings
+rate all picks
+make prediction text
+set up a100 with multiprompt code
+
+eventually
+	super tags, (portraits, trippy, landscape..)
+		it uses these tags to give certain artists/styles extra likeliness to be selected
+
+
+@markdown _For collaboration and updates, email to martin.kallstrom@gmail.com_
+
+user tells 
+	how many(or up to how many), -artnumran 3 -artnum 3
+	the names and numbers of any definite ones
+		$ - random style
+		@ - random artists
+		^ - random keyword
+		: - if alone, random weight
+		:3 - designated weight of 3
+		this - 'this' with no weight
+		that: - 'that with a random weight'
+		, - seperates prompts
+		,, - the space between these indicates a completely random modifier
+		this is> - 'this is' plus a completion prompt
+		<was clear - a pre completion prompt with 'was clear' after it
+
+example:
+	python3 promgen.py "this is a big>:,@:,@:,$:" 
+		gets gpt3 response with "this is a big", gives it a random weight, then gets 2 artists and a style, 
+			and gives them random weights
+
+
+
