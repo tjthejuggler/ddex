@@ -40,7 +40,7 @@ prompts_file = open( "prompgen_prompts.txt", "r")
 pre_prompts = prompts_file.readlines()
 prompts_file.close()
 
-
+artist_intos = ["in the style of","by","inspired by","resembling"]
 
 prompts = []
 
@@ -51,7 +51,7 @@ def rand_item(my_list):
 	return intro+random.choice(my_list).strip()
 
 def rand_w():
-	to_ret = str(random.randint(1,10))
+	to_ret = str(random.randint(1,9))
 	return (to_ret)
 
 def get_result(user_prompt):
@@ -76,6 +76,8 @@ print('user_input', user_input)
 for i in range(batch_size):#this will run once for each prompt it will create
 	prompt_to_append = ''
 	for section in user_input.split(","): #analyze 
+		section = section.replace('"', '')
+		print('section', section)
 		if len(prompt_to_append) > 1: #if we have already been through once, then make a ,
 			prompt_to_append = prompt_to_append + ","
 		prompt_to_append = prompt_to_append + '"'
@@ -98,9 +100,9 @@ for i in range(batch_size):#this will run once for each prompt it will create
 				prompt_to_append = prompt_to_append + ":"+rand_w()+'"'
 			else:
 				if ":" in section:
-					prompt_to_append = prompt_to_append + section.split(":")[0]
+					prompt_to_append = prompt_to_append + section+'"'
 					if section[-1] == ":":
-						prompt_to_append = prompt_to_append + ":"+rand_w()+'"'
+						prompt_to_append = prompt_to_append + rand_w()+'"'
 				else:
 					prompt_to_append = user_input
 		if section[0] == "$" or section[0] == "@" or section[0] == "^":
@@ -110,10 +112,14 @@ for i in range(batch_size):#this will run once for each prompt it will create
 				else:
 					prompt_to_append = prompt_to_append + user_input.split(":")[1]
 			prompt_to_append = prompt_to_append + '"'
-
-	#print("p",prompt_to_append)
 	prompt_to_append = prompt_to_append.replace('""', '"').replace('" ', '"')
 	prompt_to_append = re.sub(' +', ' ', prompt_to_append).replace(" ,]", "]")
+	prompt_to_append = re.sub('":\d+','', prompt_to_append)
+	prompt_to_append = re.sub('", :\d+','", ', prompt_to_append)
+	prompt_to_append = prompt_to_append.replace('", ","', ", ")
+	#:5:8
+	prompt_to_append = re.sub(':\d:\d',':'+rand_w(), prompt_to_append)
+	prompt_to_append = prompt_to_append.replace('", ", ', '')
 	prompts.append(prompt_to_append)
 
 for item in prompts:

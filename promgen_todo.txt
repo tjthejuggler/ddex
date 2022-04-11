@@ -5,13 +5,10 @@ continue checking new format thing for bugs and testing prompts
 
 get lots of great prompts
 eventually the artists can be put into categories
-	the ai could go out of its way to combine artists from various groups that should make interesting contrasts
-artstation variation
-	use deviantart
-	trending on
-	featured on
-artists into "in the style of"
-find out how to do gpt3 with a blank before it
+
+
+
+
 add new pics to ddex
 make ratings
 rate all picks
@@ -21,7 +18,11 @@ set up a100 with multiprompt code
 eventually
 	super tags, (portraits, trippy, landscape..)
 		it uses these tags to give certain artists/styles extra likeliness to be selected
-
+	the ai could go out of its way to combine artists from various groups that should make interesting contrasts
+artstation variation
+	use deviantart
+	trending on
+	featured on
 
 @markdown _For collaboration and updates, email to martin.kallstrom@gmail.com_
 
