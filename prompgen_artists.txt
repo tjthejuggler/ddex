@@ -6,33 +6,16 @@ Jeff Easley
 Brian Froud
 Wendy Froud
 Peter Gric
-Wayne Barlowe
-Hans Bellmer
-Alexander Jansson
-Igor Morski
 Jim Burns
 Michael Whelan
 Tyler Edlin
 Bob Eggleton
-Alexander Jansson
 Vustave Dore
 Chesley Bonestell
-Dark/Creepy
-Peter Gric
-Hans Bellmer
 Zdzisław Beksiński
-Brian Froud
-Wendy Froud
-Igor Morski
-Wayne Barlowe
 H.P. Lovecraft
 Tim Burton
-Fantasy
-Noah Bradley
 Gerald Brom
-Karol Bak
-Tim White
-Jim Burns
 Rembrandt van Rijn
 Eyvind Earle
 Hilma af Klint
@@ -43,13 +26,10 @@ Esao Andrews
 Giuseppe Arcimboldo
 John James Audubon
 Francis Bacon
-Karol Bak
 Banksy
 Jean-Michel Basquiat
 Bauhaus
 Beeple
-Zdzislaw Beksinski
-Zdzisław Beksiński
 John Berkey
 Albert Bierstadt
 Ivan Bilibin
@@ -59,7 +39,6 @@ Johfra Bosschart
 Sandro Botticelli
 Noah Bradley
 Gerald Brom
-Jim Burns
 Caravaggio
 Thomas Cole
 John Constable
@@ -74,7 +53,6 @@ Vincent Di Fate
 Edmund Dulac
 Albrecht Dürer
 Eyvind Earle
-Bob Eggleton
 Larry Elmore
 Ed Emshwiller
 M.C. Escher
@@ -146,7 +124,6 @@ Esteban Vicente
 Louis Wain
 Ron Walotsky
 Andy Warhol
-Tim White
 Liam Wong
 Jacek Yerka
 Yuumei
@@ -178,7 +155,6 @@ Hans Bellmer
 Mary Blair
 William Blake
 Victor Brauner
-Edward Burne-Jones
 Gaston Bussière
 Claude Cahun
 Clyde Caldwell
@@ -244,11 +220,8 @@ João Artur da Silva
 Leonardo da Vinci
 Richard Dadd
 Walt Disney
-Jeff Easley
 Max Ernst
 Kelly Freas
-Brian Froud
-Wendy Froud
 Ernst Fuchs
 Henry Fuseli
 Paul Gauguin
@@ -259,7 +232,6 @@ Warwick Goble
 Rob Gonsalves
 Arshile Gorky
 Jane Graverol
-Peter Gric
 Henriette Grindat
 Matthias Grünewald
 Thomas Häfner
@@ -280,7 +252,6 @@ Filippino Lippi
 Maria Sibylla Merian
 Bob Ringwood
 Jakub Rozalski
-Jakub Różalski
 Greg Rutkowski
 Michael Whelan
 Mike Winkelmann 

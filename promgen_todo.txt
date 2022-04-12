@@ -1,19 +1,22 @@
 todo
 
 continue checking new format thing for bugs and testing prompts
+put batch_size int into args
 
+create a directory for outputs
+	directory based on model name
 
-get lots of great prompts
-eventually the artists can be put into categories
+organize stuff into functions
 
-
-
+put new colab stuff into ddex
 
 add new pics to ddex
 make ratings
-rate all picks
+rate all pics
+	make a way to input rating into ddex
 make prediction text
 set up a100 with multiprompt code
+get lots of great prompts
 
 eventually
 	super tags, (portraits, trippy, landscape..)
