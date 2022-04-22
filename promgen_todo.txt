@@ -1,24 +1,32 @@
 todo
 
-continue checking new format thing for bugs and testing prompts
-put batch_size int into args
+"the only>:,:,:,:,:"
 
-create a directory for outputs
-	directory based on model name
+get rid of tkinter image viewer
+find out why other window is blank, fill it with stats and a place to put in post stats (maybe just stick it in that same dictionary just with my own keys, or maybe stick it into a new file with its own dict)
 
-organize stuff into functions
+put most important stats underneath the prompt
 
-put new colab stuff into ddex
+make the promp selector use a selector that can be controlled with the arrow keys
+	ultimately it should make the image change immediately (prolly using tkinter image but it will need to be resized based on screen size)
 
-add new pics to ddex
-make ratings
+make ratings and tags ability
+	be able to filter by ratings/tags/(any other property)
+
 rate all pics
 	make a way to input rating into ddex
-make prediction text
+
+make pre-prediction text format
+
 set up a100 with multiprompt code
+
 get lots of great prompts
 
-eventually
+hook colab export directly to local dir to save time
+
+make it default to showing the ddex name selector on bottom monitor and the image on the top
+
+EVENTUALLY
 	super tags, (portraits, trippy, landscape..)
 		it uses these tags to give certain artists/styles extra likeliness to be selected
 	the ai could go out of its way to combine artists from various groups that should make interesting contrasts
@@ -27,22 +35,22 @@ artstation variation
 	trending on
 	featured on
 
-@markdown _For collaboration and updates, email to martin.kallstrom@gmail.com_
 
-user tells 
-	how many(or up to how many), -artnumran 3 -artnum 3
-	the names and numbers of any definite ones
-		$ - random style
-		@ - random artists
-		^ - random keyword
-		: - if alone, random weight
-		:3 - designated weight of 3
-		this - 'this' with no weight
-		that: - 'that with a random weight'
-		, - seperates prompts
-		,, - the space between these indicates a completely random modifier
-		this is> - 'this is' plus a completion prompt
-		<was clear - a pre completion prompt with 'was clear' after it
+
+README
+This script makes AI image generation prompts.
+
+$ - random style
+@ - random artists
+^ - random keyword
+: - if alone, random weight
+:3 - designated weight of 3
+this - 'this' with no weight
+that: - 'that with a random weight'
+, - seperates prompts
+,, - the space between these indicates a completely random modifier
+this is> - 'this is' plus a completion prompt
+<was clear - a pre completion prompt with 'was clear' after it
 
 example:
 	python3 promgen.py "this is a big>:,@:,@:,$:" 

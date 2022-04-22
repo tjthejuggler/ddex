@@ -1,0 +1,5 @@
+["Low poly:6","made of wire:3","synthwave:8","by Pascal Blanché:3","by James Jean:7"]
+["woodcut:3","Photo taken with Fugifilm Superia:7","hyperrealism:2","by Chris Moore:7","by Claude Cahun:6"]
+["made of cheese:3","Unsplash contest winner:5","watercolor painting:5","by Matthias Grünewald:8","by Winslow Homer:7"]
+["Photo taken with Provia:9","woodcut:6","narrative realism:2","by Donato Giancola:1","by Edward Hopper:7"]
+["Provia:7","hall of mirrors:7","ambrotype:2","by Hans Bellmer:5","by Lyubov Popova:7"]

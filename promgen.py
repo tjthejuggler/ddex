@@ -9,8 +9,8 @@ import os
 api_key = os.environ.get("OPEN_AI_API")
 openai.api_key = api_key 
 
-my_engine = "ada"
-#my_engine = "davinci"
+engine = "ada"
+engine = "davinci"
 
 styles_file = open( "prompgen_styles.txt", "r")
 styles = styles_file.readlines()
@@ -47,7 +47,7 @@ def rand_w():
 	to_ret = str(random.randint(1,9))
 	return (to_ret)
 
-def get_result(user_prompt):
+def get_result(user_prompt, pre_prompts):
 	prompt = """
 	* """+ random.choice(pre_prompts) + """
 	* """+ random.choice(pre_prompts) + """
@@ -55,10 +55,18 @@ def get_result(user_prompt):
 	* """+ random.choice(pre_prompts) + """
 	* """+ random.choice(pre_prompts) + """
 	* """+ user_prompt
-	response = openai.Completion.create(engine=my_engine, prompt=prompt, max_tokens=30, stop= "\n")
+	response = openai.Completion.create(engine=engine, prompt=prompt, max_tokens=30, stop= "\n")
 	result = response["choices"][0]["text"].strip()
 	result = result.replace(',',(":"+rand_w()+'", "')).replace('.',(":"+rand_w()+'", "'))
 	return result
+
+def create_output_file(filename, output_lines):
+	#print('creating output file', filename)
+	cwd = os.getcwd()
+	folder_name = engine
+	with open(cwd+'/'+folder_name+'/'+filename + '.txt', 'w') as f:
+		for item in output_lines:
+			f.write("[%s]\n" % item.strip("\n"))
 
 def main():
 	(user_input, batch_size) = get_args()
@@ -115,7 +123,7 @@ def main():
 		prompt_to_append = prompt_to_append.replace('", ", ', '')
 		prompt_to_append = prompt_to_append.replace(':"', ':')
 		prompts.append(prompt_to_append)
-
+	create_output_file(user_prompt.replace(' ', '_')+str(random.randint(0,1000000)), prompts)
 	for item in prompts:
 		print("["+item.replace('""','"')+"],")
 

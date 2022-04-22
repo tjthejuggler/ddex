@@ -1,5 +1,3 @@
-it goes through every text file in the dirs and makes autocomplete and easy search/filter 
-even look in partials for ones that are uncomplete but in same collection
 
 switch Text to Listbox
    
@@ -13,28 +11,32 @@ listbox.insert(5, "Vegetables")
    
 listbox.pack()
 
-
 when dopdown item is selected, check to see if that item in sample is true/false, a number, or a string and set type of
 	filtering / input accordingly
 
+find the place that i made the note about the missing images and fix the issue
 
 #make search field selectable
 	#dropdown that is full of all keys
 		#if it is number, then we should accept ranges (30 - 50 should work
 
-#a way to add data to images(ratings..)
-#a way to see all data we have on an image
+a way to add data to images(ratings..)
+	a seperate json is probably the solution
+
+a way to see all data we have on an image
 
 #clean up code, rename and functionize
 
-make image be in seperate window
-
-
 #i should be able to see everything else about the file when i click on it
+	the settings json and my rating json
+
+
+it goes through every text file in the dirs and makes autocomplete and easy search/filter 
+even look in partials for ones that are uncomplete but in same collection
 
 
 PROMPT GEN
-	try this using example prompts with weights and seperated, if it doesnt work, then find some way to trick it
+	try this using example prompts with weights and seperated, if it doesn't work, then find some way to trick it
 		maybe just seperate things with periods and then use a replace('.', ':2","')
 
 	fill prompt and artist files
@@ -53,8 +55,6 @@ PROMPT GEN
 				...
 				user_prompt - 
 
-				
-
 	#prompt generator can be a combination of what things are getting good results and random words from out in
 	#	the world. Can probably hook this up to some gpt api
 
@@ -67,5 +67,11 @@ MISC
 
 	#organize prompt notes
 
+PROMPT IDEAS
+	wise baby meditating on in the woods
 
 16:9 2560,1440
+
+
+RESEARCH:
+will Centipede diffusion let me keep a latent diffusion image

@@ -1,17 +1,29 @@
 SSH INSTALLATION
 to set up remote ssh server with disco diffusion (https://botbox.dev/disco-diffusion-guide/)
-apt get git
+apt-get install git
 apt-get install wget
-wget https://files.botbox.dev/discoAI/download/main.zip
+apt-get install nano
+git clone https://github.com/tjthejuggler/discomain.git
+pip install -r requirements.txt
+pip install timm
+pip install lpips
+pip install ftfy
+pip install regex
+pip install matplotlib
+pip install ipywidgets
 wget https://files.botbox.dev/discoAI/models/512x512_diffusion_uncond_finetune_008100.pt
 wget https://files.botbox.dev/discoAI/models/secondary_model_imagenet_2.pth
+wget https://dl.fbaipublicfiles.com/slip/slip_base_100ep.pt
+wget https://dl.fbaipublicfiles.com/slip/slip_large_100ep.pt
+
+wget https://files.botbox.dev/discoAI/download/main.zip
 apt-get install unzip
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
 echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
 apt-get update
-apt-get install sublime-text
+
 apt-get install libglu1-mesa:i386
-apt-get install nano
+
 pip3 install torch torchvision torchaudio for macOS, or pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 mv ~/Downloads/MyFile.txt ~/Documents/Work/MyFile.txt
 mv ./secondary_model_imagenet_2.pth ./main/content
@@ -374,3 +386,11 @@ Artists
 	https://weirdwonderfulai.art/resources/disco-diffusion-70-plus-artist-studies/
 Style
 	https://weirdwonderfulai.art/resources/disco-diffusion-modifiers/
+
+AI TOOLS
+runway - ai video editor 
+https://app.runwayml.com/video-tools/projects?utm_source=runway&utm_medium=referral&utm_campaign=olufemii-dec-2021
+
+list of text-to-image AIs:  https://analyticsindiamag.com/top-4-dall-e-alternatives-text-to-image-generators/
+
+datasets - https://data.world/
