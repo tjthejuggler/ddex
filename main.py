@@ -84,43 +84,65 @@ class ExampleApp(tk.Tk):
 		tk.Tk.__init__(self) #required thing for making a tkinter GUI
 		# self.status = tk.Label(self, anchor="w") #text that the user cant change
 		# self.status.pack(side="bottom", fill="x")
-		langs = ('Java', 'C#', 'C', 'C++', 'Python',
-		        'Go', 'JavaScript', 'PHP', 'Swift')
+		langs = ()
 
 		langs_var = tk.StringVar(value=langs)
-
 
 		self.images_listbox = tk.Listbox(self, listvariable=langs_var, width=400, height=10, selectmode='extended')
 		self.images_listbox.pack(fill="both", expand=True)
 
-		def items_selected(*args):
-			print("hi")
+		def enter_pressed_on_listbox_item(*args):
+			#self.images_listbox.delete(0, tk.END)
+			#self.images_listbox.delete(tk.END)
+			self.images_listbox.delete(0,tk.END)
 
-		self.images_listbox.bind('<<ListboxSelect>>', items_selected)
+			index_of_selected_item = self.images_listbox.curselection()[0]
+
+			path_of_currently_selected_item = self.images_path_list[index_of_selected_item]
+			im = Image.open(path_of_currently_selected_item)
+			im.show()
+
+			self.data.configure(state="normal")
+			self.data.delete('1.0', tk.END)
+			self.data.insert("end", "test")
+			self.data.configure(state="disabled")
+
+		self.images_listbox.bind("<Return>", enter_pressed_on_listbox_item)
+		#root.bind("<Return>"
 
 		self.text = tk.Text(self, wrap="word", width=400, height=10, cursor="xterm #0000FF") #create text object
 		self.text.configure(state="normal")
 		self.text.pack(fill="both", expand=True) #this actually adds our text object to our GUI
 		self.text.bind("<1>", self.text_item_clicked) #this make it so that our text object can be used like a button
-		
+
 		self.user_text = tk.StringVar() # used with the tkinter entry object
 		self.images_path_list, self.image_prompts_list = get_filtered_images(self.user_text.get())
 		for ind,prompt in enumerate(self.image_prompts_list):
 			self.ending = '('+self.images_path_list[ind].split('(')[1]
+
 			self.text.insert("end", prompt + self.ending+'\n')
+			self.images_listbox.insert("end", prompt + self.ending+'\n')
+
+			#self.images_listbox.insert(ind)
 		#self.text.configure(state="disabled")
 		
+
+
 		def user_search_entry_changed(*args): #filters our image list based on the users entry
 			#print(self.user_text.get())
+
 			self.text.configure(state="normal") #makes the text changable
 			self.text.delete('1.0', tk.END)#deletes everything in text
+			self.images_listbox.delete(tk.END)
 			print('self.user_text.get()', self.user_text.get())
 			self.images_path_list, self.image_prompts_list = get_filtered_images(self.user_text.get())
 			for ind,prompt in enumerate(self.image_prompts_list):	
 				#print('here')
 				self.ending = '('+self.images_path_list[ind].split('(')[1]
 				self.text.insert("end", prompt + self.ending+'\n')
+				self.images_listbox.insert("end", prompt + self.ending+'\n')
 			self.text.configure(state="disabled") #makes the text not changable
+
 			return True		
 
 		self.user_text.trace_add('write', user_search_entry_changed) #'user_search_entry_changed' gets run whenever the user_text entry changes 
