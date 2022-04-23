@@ -1,28 +1,28 @@
 At least one from each group, but as many as apply
 
-hyperrealistic (very close to photos) - this one may be rare
-realistic (actual real things, but obviously not a photo)
-surreal (breaks usual physics)
-abstract (lots of shapes and patterns, not everything is identifiable)
-fantasy (witches, angels, magic, dragons, faries..)
+3 hyperrealistic (very close to photos) - this one may be rare
+4 realistic (actual real things, but obviously not a photo)
+5 surreal (breaks usual physics)
+6 abstract (lots of shapes and patterns, not everything is identifiable)
+7 fantasy (witches, angels, magic, dragons, faries..)
 
-people
-animals
-nature
-buildings
-space
-objects
+9 people
+10 creatures (real or unreal animals)
+11 nature
+12 buildings
+13 space
+14 objects
 
-pencil
-paint
-CGI
+16 pencil
+17 paint
+18 CGI
 
-colorful
-dull
-black and white
+20 colorful
+21 dull
+22 black and white
 
 If not obvious, then don't pick one
 
-new
-old
-creepy
+26 new
+27 old
+28 creepy

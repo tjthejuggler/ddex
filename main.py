@@ -33,6 +33,9 @@ for subdir, dirs, files in os.walk(directory): #looping through every folder and
 			#if both these conditions are met, then we continue, if not we move on to the next file
 			with open(this_path_to_the_file.split(filename)[0]+settings_file_name, 'r') as f: #we open the text(settings/json) file
 				use_this_image = True #we are going to add this image to our app
+
+				print(this_path_to_the_file.split(filename)[0]+settings_file_name)
+
 				data = json.load(f) #gets the text from the settings file
 				text = f.read()
 
@@ -81,10 +84,25 @@ class ExampleApp(tk.Tk):
 		tk.Tk.__init__(self) #required thing for making a tkinter GUI
 		# self.status = tk.Label(self, anchor="w") #text that the user cant change
 		# self.status.pack(side="bottom", fill="x")
+		langs = ('Java', 'C#', 'C', 'C++', 'Python',
+		        'Go', 'JavaScript', 'PHP', 'Swift')
+
+		langs_var = tk.StringVar(value=langs)
+
+
+		self.images_listbox = tk.Listbox(self, listvariable=langs_var, width=400, height=10, selectmode='extended')
+		self.images_listbox.pack(fill="both", expand=True)
+
+		def items_selected(*args):
+			print("hi")
+
+		self.images_listbox.bind('<<ListboxSelect>>', items_selected)
+
 		self.text = tk.Text(self, wrap="word", width=400, height=10, cursor="xterm #0000FF") #create text object
 		self.text.configure(state="normal")
 		self.text.pack(fill="both", expand=True) #this actually adds our text object to our GUI
 		self.text.bind("<1>", self.text_item_clicked) #this make it so that our text object can be used like a button
+		
 		self.user_text = tk.StringVar() # used with the tkinter entry object
 		self.images_path_list, self.image_prompts_list = get_filtered_images(self.user_text.get())
 		for ind,prompt in enumerate(self.image_prompts_list):
