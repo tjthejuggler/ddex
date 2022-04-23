@@ -1,5 +1,3 @@
-#in python loop through all text files in ./directories and all subdirectories and save each one as a json object
-
 #import libraries of other peoples code
 import os #file locations and directories
 import json #deals with json files
@@ -47,14 +45,10 @@ def get_filtered_images(user_input): #goes through all the text files that match
 	for data in json_objects: #we loop through each text file
 		#print('1', data['text'])
 		if user_input.lower() in data['text']['text_prompts'].lower():
-			print('user_input', user_input)
-			print('item', item)
 			result = json.dumps(data['text']['text_prompts']) # we look at the prompts
 			images_path_list.append(data['path'])
 			images_prompt_list.append(result)
 	images_path_list, images_prompt_list = (list(t) for t in zip(*sorted(zip(images_path_list, images_prompt_list))))
-	# print('images_path_list', images_path_list)
-	# print('')
 	return images_path_list, images_prompt_list
 
 #design our GUI(graphical user interface)
@@ -66,7 +60,7 @@ class ExampleApp(tk.Tk):
 		langs_var = tk.StringVar(value=())
 		self.images_listbox = tk.Listbox(self, listvariable=langs_var, width=400, height=10, selectmode='extended')
 		self.images_listbox.pack(fill="both", expand=True)
-		def enter_pressed_on_listbox_item(*args):
+		def image_chosen_by_user(*args):
 			index_of_selected_item = self.images_listbox.curselection()[0]
 			path_of_currently_selected_item = self.images_path_list[index_of_selected_item]
 			im = Image.open(path_of_currently_selected_item)
@@ -75,30 +69,22 @@ class ExampleApp(tk.Tk):
 			self.data.delete('1.0', tk.END)
 			self.data.insert("end", "test")
 			self.data.configure(state="disabled")
-		self.images_listbox.bind("<Return>", enter_pressed_on_listbox_item)
-		# self.text = tk.Text(self, wrap="word", width=400, height=10, cursor="xterm #0000FF") #create text object
-		# self.text.configure(state="normal")
-		# self.text.pack(fill="both", expand=True) #this actually adds our text object to our GUI
-		# self.text.bind("<1>", self.text_item_clicked) #this make it so that our text object can be used like a button
+		self.images_listbox.bind("<Return>", image_chosen_by_user)
+		self.images_listbox.bind('<Double-Button>', image_chosen_by_user)
+
 		self.user_text = tk.StringVar() # used with the tkinter entry object
 		self.images_path_list, self.image_prompts_list = get_filtered_images(self.user_text.get())
 		for ind,prompt in enumerate(self.image_prompts_list):
 			self.ending = '('+self.images_path_list[ind].split('(')[1]
-			#self.text.insert("end", prompt + self.ending+'\n')
 			self.images_listbox.insert("end", prompt + self.ending+'\n')
 
 		def user_search_entry_changed(*args): #filters our image list based on the users entry
-			# self.text.configure(state="normal") #makes the text changable
-			# self.text.delete('1.0', tk.END)#deletes everything in text
 			self.images_listbox.delete(0, tk.END)
 			print('self.user_text.get()', self.user_text.get())
 			self.images_path_list, self.image_prompts_list = get_filtered_images(self.user_text.get())
 			for ind,prompt in enumerate(self.image_prompts_list):	
-				#print('here')
 				self.ending = '('+self.images_path_list[ind].split('(')[1]
-				#self.text.insert("end", prompt + self.ending+'\n')
 				self.images_listbox.insert("end", prompt + self.ending+'\n')
-			#self.text.configure(state="disabled") #makes the text not changable
 			return True		
 
 		self.user_text.trace_add('write', user_search_entry_changed) #'user_search_entry_changed' gets run whenever the user_text entry changes 
@@ -135,31 +121,6 @@ class ExampleApp(tk.Tk):
 		self.postdata_save = tk.Button(self.data_window, text="postdata save", command=click_postdata_save)
 		self.postdata_save.pack(side="top", fill="x")
 
-
-	# def text_item_clicked(self, event):
-	# 	index = self.text.index("@%s,%s" % (event.x, event.y))
-	# 	line, char = index.split(".")
-	# 	line = str(int(line) - 1)		
-	# 	path = self.images_path_list[int(line)]
-	# 	im = Image.open(path)
-	# 	im.show()
-
-	# 	self.data.configure(state="normal")
-	# 	self.data.delete('1.0', tk.END)
-	# 	self.data.insert("end", "test")
-	# 	self.data.configure(state="disabled")
-	# 	#THIS SHOWS THE IMAGE INSIDE OF TKINTER, IT CANT DO FULLSCREEN LIKE THIS
-	# 	# self.status.configure(text=path)
-	# 	# self.img = tk.PhotoImage(file=path)
-	# 	# if self.img.width()>1920 or self.img.height()>800:
-	# 	# 	self.img = self.img.subsample(2)
-	# 	# self.preview.configure(image=self.img,borderwidth=4, relief="ridge")
-
-	# 	# for data_item in json_objects:
-	# 	# 	if data_item['path'] == path:
-	# 	# 		self.data.delete('1.0', tk.END)
-	# 	# 		image_data = data_item['text']
-	# 	# 		self.data.insert("end", json.dumps(image_data, indent=4, sort_keys=True))
 if __name__ == "__main__":
 	app = ExampleApp()
 	app.mainloop()

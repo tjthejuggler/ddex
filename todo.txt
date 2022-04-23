@@ -1,17 +1,6 @@
+make data show when listbox item entered
 
-switch Text to Listbox
-   
-listbox = Listbox(root)  
-   
-listbox.insert(1,"Bread")  
-listbox.insert(2, "Milk")  
-listbox.insert(3, "Meat")  
-listbox.insert(4, "Cheese")
-listbox.insert(5, "Vegetables")  
-   
-listbox.pack()
-
-when dopdown item is selected, check to see if that item in sample is true/false, a number, or a string and set type of
+when dropdown item is selected, check to see if that item in sample is true/false, a number, or a string and set type of
 	filtering / input accordingly
 
 find the place that i made the note about the missing images and fix the issue
