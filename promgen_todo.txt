@@ -1,6 +1,6 @@
 todo
 
-"the only>:,:,:,:,:"
+make an output that works for Centipede Diffusion
 
 get rid of tkinter image viewer
 find out why other window is blank, fill it with stats and a place to put in post stats (maybe just stick it in that same dictionary just with my own keys, or maybe stick it into a new file with its own dict)

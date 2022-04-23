@@ -34,6 +34,14 @@ a way to see all data we have on an image
 it goes through every text file in the dirs and makes autocomplete and easy search/filter 
 even look in partials for ones that are uncomplete but in same collection
 
+a way to search for images that only have N modifiers
+
+
+
+GENERAL AI TODO
+	get Centipede diffusion working on an a100 or a6000
+
+
 
 PROMPT GEN
 	try this using example prompts with weights and seperated, if it doesn't work, then find some way to trick it
