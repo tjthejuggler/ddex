@@ -1,38 +1,31 @@
+delete every folder named 'partials' from 
+
 make data show when listbox item entered
+#i should be able to see everything else about the file when i click on it
+	the settings json and my rating json
+a way to add data to images(ratings..)
+	a seperate json is probably the solution
 
 when dropdown item is selected, check to see if that item in sample is true/false, a number, or a string and set type of
 	filtering / input accordingly
-
-find the place that i made the note about the missing images and fix the issue
 
 #make search field selectable
 	#dropdown that is full of all keys
 		#if it is number, then we should accept ranges (30 - 50 should work
 
-a way to add data to images(ratings..)
-	a seperate json is probably the solution
-
-a way to see all data we have on an image
-
 #clean up code, rename and functionize
-
-#i should be able to see everything else about the file when i click on it
-	the settings json and my rating json
-
-
-it goes through every text file in the dirs and makes autocomplete and easy search/filter 
-even look in partials for ones that are uncomplete but in same collection
 
 a way to search for images that only have N modifiers
 
-
+a way to explore animations
 
 GENERAL AI TODO
+	learn about github copilot
 	get Centipede diffusion working on an a100 or a6000
 
-
-
 PROMPT GEN
+	this should be able to output in a format that works well for centiped
+
 	try this using example prompts with weights and seperated, if it doesn't work, then find some way to trick it
 		maybe just seperate things with periods and then use a replace('.', ':2","')
 
@@ -72,3 +65,7 @@ PROMPT IDEAS
 
 RESEARCH:
 will Centipede diffusion let me keep a latent diffusion image
+
+
+23:32
+
