@@ -1,5 +1,5 @@
 At least one from each group, but as many as apply
-
+2 religious 
 3 hyperrealistic (very close to photos) - this one may be rare
 4 realistic (actual real things, but obviously not a photo)
 5 surreal (breaks usual physics)
@@ -12,17 +12,19 @@ At least one from each group, but as many as apply
 12 buildings
 13 outerspace
 14 objects
+15 boats
 
 16 pencil
 17 paint
 18 CGI
 
 20 colorful
-21 dull
+21 dull - not bright colors
 22 black and white
 
 If not obvious, then don't pick one
 
 26 new
 27 old
-28 creepy
+28 creepy - scary evil scary big animals
+29 cartoon
