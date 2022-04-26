@@ -19,10 +19,6 @@ a way to search for images that only have N modifiers
 
 a way to explore animations
 
-GENERAL AI TODO
-	learn about github copilot
-	get Centipede diffusion working on an a100 or a6000
-
 PROMPT GEN
 	this should be able to output in a format that works well for centiped
 
