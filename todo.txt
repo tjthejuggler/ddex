@@ -1,5 +1,3 @@
-delete every folder named 'partials' from 
-
 make data show when listbox item entered
 #i should be able to see everything else about the file when i click on it
 	the settings json and my rating json
@@ -13,15 +11,9 @@ when dropdown item is selected, check to see if that item in sample is true/fals
 	#dropdown that is full of all keys
 		#if it is number, then we should accept ranges (30 - 50 should work
 
-#clean up code, rename and functionize
-
 a way to search for images that only have N modifiers
 
 a way to explore animations
-
-GENERAL AI TODO
-	learn about github copilot
-	get Centipede diffusion working on an a100 or a6000
 
 PROMPT GEN
 	this should be able to output in a format that works well for centiped
