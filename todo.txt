@@ -1,3 +1,11 @@
+HATICE:
+generic animation formatter
+	i put a list into a specific file and then run the program with an int argument and it returns something i can put in as an animation prompt
+
+	it is all in the anim folder
+
+---------------------------
+
 make data show when listbox item entered
 #i should be able to see everything else about the file when i click on it
 	the settings json and my rating json
@@ -14,50 +22,3 @@ when dropdown item is selected, check to see if that item in sample is true/fals
 a way to search for images that only have N modifiers
 
 a way to explore animations
-
-PROMPT GEN
-	this should be able to output in a format that works well for centiped
-
-	try this using example prompts with weights and seperated, if it doesn't work, then find some way to trick it
-		maybe just seperate things with periods and then use a replace('.', ':2","')
-
-	fill prompt and artist files
-		randomly choose some number of them (a different number of them for each generated prompts)
-	get artists and prompts from files, 
-	randomly choose number of artists, and how to refer to them (by, in the style of)
-
-	my input
-		begining
-		middle
-		end
-		general idea
-			(maybe like this) GPT3
-				happy - a prompt about happiness
-				clown - a prompt about clowns
-				...
-				user_prompt - 
-
-	#prompt generator can be a combination of what things are getting good results and random words from out in
-	#	the world. Can probably hook this up to some gpt api
-
-	#scrape all artists/styles/modifier words
-
-	#find a good ai for making sentences more descriptive, look into training them on prompts
-		#some sort of sentence enhancer for authors
-
-MISC
-
-	#organize prompt notes
-
-PROMPT IDEAS
-	wise baby meditating on in the woods
-
-16:9 2560,1440
-
-
-RESEARCH:
-will Centipede diffusion let me keep a latent diffusion image
-
-
-23:32
-

@@ -1,9 +1,38 @@
+PROMPT GEN
+	this should be able to output in a format that works well for centiped
+
+	try this using example prompts with weights and seperated, if it doesn't work, then find some way to trick it
+		maybe just seperate things with periods and then use a replace('.', ':2","')
+
+	fill prompt and artist files
+		randomly choose some number of them (a different number of them for each generated prompts)
+	get artists and prompts from files, 
+	randomly choose number of artists, and how to refer to them (by, in the style of)
+
+	my input
+		begining
+		middle
+		end
+		general idea
+			(maybe like this) GPT3
+				happy - a prompt about happiness
+				clown - a prompt about clowns
+				...
+				user_prompt - 
+
+	#prompt generator can be a combination of what things are getting good results and random words from out in
+	#	the world. Can probably hook this up to some gpt api
+
+	#scrape all artists/styles/modifier words
+
+	#find a good ai for making sentences more descriptive, look into training them on prompts
+		#some sort of sentence enhancer for authors
+
 todo
 
 make an output that works for Centipede Diffusion
 
 get rid of tkinter image viewer
-find out why other window is blank, fill it with stats and a place to put in post stats (maybe just stick it in that same dictionary just with my own keys, or maybe stick it into a new file with its own dict)
 
 put most important stats underneath the prompt
 

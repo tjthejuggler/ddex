@@ -13,7 +13,13 @@ openai.api_key = api_key
 engine = "ada"
 engine = "davinci"
 
-category_keys = {'2': 'religious', '3': 'hyperrealistic'}
+category_keys = {
+			'2': 'religious', '3': 'hyperrealistic', '4': 'realistic', '5': 'surreal',
+			'6': 'abstract', '7': 'fantasy', '9': 'people', '10': 'creatures', '11': 'nature',
+			'12': 'buildings', '13': 'space', '14': 'objects', '15': 'boats', '16': 'cars',
+			'17': 'pencil',	'18': 'paint', '19': 'CGI', '20': 'colorful', '21': 'dull', '22': 'black and white'
+			'26': 'new','27': 'old','28': 'creepy',	'29': 'cartoon'
+			}
 
 def load_modifiers():
 	styles_file = open( "prompgen_styles.txt", "r")
@@ -47,9 +53,30 @@ def get_args():
 		description=textwrap.dedent('''\
 			for use with -e and -a, comma seperated (ex: -e 1,5,14)
 			Category Key:
-			2 - religious
-			3 - hyperrealistic
-
+			2 religious 
+			3 hyperrealistic (very close to photos) - this one may be rare
+			4 realistic (actual real things, but obviously not a photo)
+			5 surreal (breaks usual physics)
+			6 abstract (lots of shapes and patterns, not everything is identifiable)
+			7 fantasy (witches, angels, magic, dragons, faries..)
+			9 people
+			10 creatures (real or unreal animals)
+			11 nature
+			12 buildings
+			13 space
+			14 objects
+			15 boats 
+			16 cars
+			17 pencil
+			18 paint
+			19 CGI
+			20 colorful
+			21 dull (not bright colors)
+			22 black and white
+			26 new
+			27 old
+			28 creepy (scary evil scary big animals)
+			29 cartoon
 			'''))
 	parser.add_argument("prompt", help="the base prompt (comma seperate each weighted section")
 	parser.add_argument("-b", "--batchsize", type = int, help="batch_size, the number of images")
