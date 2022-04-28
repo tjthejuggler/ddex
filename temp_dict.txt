@@ -1,0 +1,9 @@
+{
+"Yoshitaka Amano":[5,7,9,17,20,27],
+"Wes Anderson":["realistic",9,12,17,20,26],
+"Esao Andrews":[5,7,9,10,12,17,20,28],
+"Giuseppe Arcimboldo":[5,"realistic",9,17,20,27],
+"John James Audubon":["realistic",10,11,17,20],
+"Francis Bacon":[5,7,10,17,21,28],
+"Banksy":["realistic",9,17,22,26]
+}

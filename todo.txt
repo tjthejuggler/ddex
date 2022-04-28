@@ -1,10 +1,4 @@
-HATICE:
-generic animation formatter
-	i put a list into a specific file and then run the program with an int argument and it returns something i can put in as an animation prompt
 
-	it is all in the anim folder
-
----------------------------
 
 make data show when listbox item entered
 #i should be able to see everything else about the file when i click on it

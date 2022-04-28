@@ -7,6 +7,22 @@ import re
 import os
 import textwrap
 
+# DD
+# ["hatice is a very attractive person and very sociable:3", "if you are interested go for it:3", "who knows?:9"], 
+# ["hatice is a very sweet girl:7", "dress and caresses like dolls:7", "always returns a sign:2"]
+
+# CD
+
+#              first image              second image
+# DD format - ["cat","yellow and red"],["dog","green"]
+
+#               first image            second image
+# CD format - ["cat, yellow and red", "dog, green"]
+
+cwd = os.getcwd()
+
+use_CD_format = True
+
 api_key = os.environ.get("OPEN_AI_API")
 openai.api_key = api_key 
 
@@ -15,9 +31,9 @@ engine = "davinci"
 
 category_keys = {
 			'2': 'religious', '3': 'hyperrealistic', '4': 'realistic', '5': 'surreal',
-			'6': 'abstract', '7': 'fantasy', '9': 'people', '10': 'creatures', '11': 'nature',
+			'6': 'abstract', '7': 'fantasy', '8': 'cute', '9': 'people', '10': 'creatures', '11': 'nature',
 			'12': 'buildings', '13': 'space', '14': 'objects', '15': 'boats', '16': 'cars',
-			'17': 'pencil',	'18': 'paint', '19': 'CGI', '20': 'colorful', '21': 'dull', '22': 'black and white'
+			'17': 'pencil',	'18': 'paint', '19': 'CGI', '20': 'colorful', '21': 'dull', '22': 'black and white',
 			'26': 'new','27': 'old','28': 'creepy',	'29': 'cartoon'
 			}
 
@@ -29,10 +45,15 @@ def load_modifiers():
 	artists = artists_file.readlines()
 	artists_file.close()
 
-	artists_dict = {'bob' : ["religious", "hyperrealistic"], "charlie" : ["hyperrealistic", "happy"]}
-	# if path.exists(cwd+'/promgen_artists_formatted.txt'):			
-	# 	with open(cwd+'/promgen_artists_formatted.txt') as json_file:
-	# 		artists_dict = json.load(json_file)
+	artists_dict = {}
+	#artists_dict = {'bob' : ["religious", "hyperrealistic"], "charlie" : ["hyperrealistic", "happy"]}
+	if path.exists('./promgen_artists_formatted.txt'):	
+		print('file exists')		
+		with open('./promgen_artists_formatted.txt') as json_file:
+			artists_dict = json.load(json_file)
+	print(artists_dict)
+
+
 
 	keywords_file = open( "prompgen_keywords.txt", "r")
 	keywords = keywords_file.readlines()
@@ -45,7 +66,7 @@ def load_modifiers():
 	return (styles, artists_dict, keywords, pre_prompts, artist_intros)
 
 def get_args():
-	user_input, batch_size = 'a boy', 25
+	user_input, batch_size = 'a boy', 2
 	every_categories_filter, only_categories_filter = [], []
 	parser = argparse.ArgumentParser(	    
 		prog='PROG',
@@ -59,6 +80,7 @@ def get_args():
 			5 surreal (breaks usual physics)
 			6 abstract (lots of shapes and patterns, not everything is identifiable)
 			7 fantasy (witches, angels, magic, dragons, faries..)
+			8 cute
 			9 people
 			10 creatures (real or unreal animals)
 			11 nature
@@ -77,6 +99,7 @@ def get_args():
 			27 old
 			28 creepy (scary evil scary big animals)
 			29 cartoon
+
 			'''))
 	parser.add_argument("prompt", help="the base prompt (comma seperate each weighted section")
 	parser.add_argument("-b", "--batchsize", type = int, help="batch_size, the number of images")
@@ -118,7 +141,7 @@ def get_gpt_result(user_prompt, pre_prompts):
 
 def create_output_file(filename, output_lines):
 	#print('creating output file', filename)
-	cwd = os.getcwd()
+	
 	folder_name = engine
 	with open(cwd+'/'+folder_name+'/'+filename + '.txt', 'w') as f:
 		for item in output_lines:
