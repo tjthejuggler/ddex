@@ -19,7 +19,17 @@ import textwrap
 #               first image            second image
 # CD format - ["cat, yellow and red", "dog, green"]
 
-cwd = os.getcwd()
+#bugs
+#"a big dog:9,@:3"
+#["a big dog:9","by Diego Velázquez9,@"],
+#["a big dog:9","by Diego Velázquez:3"],
+
+#"hatice is a very,@"
+#[hatice is a very,@,"by Adam Paquette"],
+#["hatice is a very","by Adam Paquette"],
+
+
+cwd = os.getcwd() #
 
 use_CD_format = True
 
@@ -44,17 +54,12 @@ def load_modifiers():
 	artists_file = open( "prompgen_artists.txt", "r")
 	artists = artists_file.readlines()
 	artists_file.close()
-
 	artists_dict = {}
 	#artists_dict = {'bob' : ["religious", "hyperrealistic"], "charlie" : ["hyperrealistic", "happy"]}
 	if path.exists('./promgen_artists_formatted.txt'):	
 		print('file exists')		
 		with open('./promgen_artists_formatted.txt') as json_file:
 			artists_dict = json.load(json_file)
-	print(artists_dict)
-
-
-
 	keywords_file = open( "prompgen_keywords.txt", "r")
 	keywords = keywords_file.readlines()
 	keywords_file.close()
@@ -116,9 +121,9 @@ def get_args():
 	user_input = args.prompt
 	return (user_input, batch_size, every_categories_filter, only_categories_filter)
 
-def rand_item(my_list):
+def rand_item(my_list, is_artist):
 	intro = ''
-	if my_list == artists:
+	if is_artist:
 		intro = 'by '
 	return intro+random.choice(my_list).strip()
 
@@ -175,7 +180,9 @@ def main():
 	styles_file = open( "prompgen_styles.txt", "r")
 	styles, artists_dict, keywords, pre_prompts, artist_intros = load_modifiers()
 	artist_intros = ["in the style of","by","inspired by","resembling"]
-	filtered_artists = artists_dict.keys()
+	filtered_artists = list(artists_dict.keys())
+	print('fa',filtered_artists)
+	print(["house", "car"])
 	if every_categories_filter and only_categories_filter:
 		print("You can't use 'every' filter and 'only' filter together")
 		quit()
@@ -187,21 +194,22 @@ def main():
 		print(filtered_artists)
 	user_prompt = ''	
 	prompts = []
-	print('user_input', user_input)
+	print('user_input', user_input) #a big dog,@
 	for i in range(batch_size):#this will run once for each prompt it will create
 		prompt_to_append = ''
 		for section in user_input.split(","): #analyze 
 			section = section.replace('"', '')
-			print('section', section)
+			print('section', section) # a big red dog  -------------- @
+
 			if len(prompt_to_append) > 1: #if we have already been through once, then make a ,
 				prompt_to_append = prompt_to_append + ","
 			prompt_to_append = prompt_to_append + '"'
 			if section[0] == "$": #style is used
-				prompt_to_append = prompt_to_append + rand_item(styles)
+				prompt_to_append = prompt_to_append + rand_item(styles, False)
 			elif section[0] == "@": #artist is used
-				prompt_to_append = prompt_to_append + rand_item(filtered_artists)
+				prompt_to_append = prompt_to_append + rand_item(filtered_artists, True)
 			elif section[0] == "^": #keyword is used
-				prompt_to_append = prompt_to_append + rand_item(keywords)
+				prompt_to_append = prompt_to_append + rand_item(keywords, False)
 			elif section[0] == ":":
 				if section[-1] == ":": #if the char after the : is not a digit, then
 					prompt_to_append = prompt_to_append + rand_item(random.choice([artists,styles,keywords]))+":"+rand_w()+'"'
@@ -219,13 +227,13 @@ def main():
 						if section[-1] == ":":
 							prompt_to_append = prompt_to_append + rand_w()+'"'
 					else:
-						prompt_to_append = user_input
+						prompt_to_append = '"'+ section + '"'
 			if section[0] == "$" or section[0] == "@" or section[0] == "^":
-				if len(section) > 1:
+				if len(section) > 1: #    @:4  
 					if section[1] == ":" and section[-1] == ":": #if no weight is given, then use a random weight
 						prompt_to_append = prompt_to_append + ":"+rand_w()
 					else:
-						prompt_to_append = prompt_to_append + user_input.split(":")[1]
+						prompt_to_append = prompt_to_append + ":" + section.split(":")[1]
 				prompt_to_append = prompt_to_append + '"'
 		print('prompt_to_append', prompt_to_append)
 		prompt_to_append = prompt_to_append.replace('""', '"').replace('" ', '"')

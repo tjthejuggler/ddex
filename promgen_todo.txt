@@ -4,48 +4,29 @@ PROMPT GEN
 
 	figure out exactly what that weight bug is, i think i am unable to give a prompt>:9 and keep that 9 there
 
+
 	fill prompt and artist files
 		randomly choose some number of them (a different number of them for each generated prompts)
 	get artists and prompts from files, 
 	randomly choose number of artists, and how to refer to them (by, in the style of)
 
 	my input
-		begining
-		middle
-		end
+		begining - current way of doing it, my prompt goes at the beginning
+		middle - my prompt goes in the middle
+		end - my prompt goes at the end
 		general idea
 			(maybe like this) GPT3
 				happy - a prompt about happiness
 				clown - a prompt about clowns
 				...
 				user_prompt - 
-
-	#prompt generator can be a combination of what things are getting good results and random words from out in
-	#	the world. Can probably hook this up to some gpt api
-
-	#scrape all artists/styles/modifier words
-
-	#find a good ai for making sentences more descriptive, look into training them on prompts
-		#some sort of sentence enhancer for authors
+		extra descriptive - my prompt becomes more descriptive
+			possible prompt: what is an extremely descriptive way to say "a man running" in a single sentence?
 
 todo
 
-make an output that works for Centipede Diffusion
 
-get rid of tkinter image viewer
 
-put most important stats underneath the prompt
-
-make the promp selector use a selector that can be controlled with the arrow keys
-	ultimately it should make the image change immediately (prolly using tkinter image but it will need to be resized based on screen size)
-
-make ratings and tags ability
-	be able to filter by ratings/tags/(any other property)
-
-rate all pics
-	make a way to input rating into ddex
-
-make pre-prediction text format
 
 set up a100 with multiprompt code
 

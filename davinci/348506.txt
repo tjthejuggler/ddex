@@ -1,0 +1,2 @@
+["a big dog:9","by Giovanni Battista Gaulli:9"]
+["a big dog:9","by Paul Delvaux:4"]

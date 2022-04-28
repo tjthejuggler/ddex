@@ -21,11 +21,11 @@
 "Eyvind Earle":["surreal","nature","paint","colorful","cartoon"],
 "Hilma af Klint":["abstract","paint","colorful"],
 "Ivan Aivazovsky":["realistic","nature","boats","paint","dull","old"],
-"Yoshitaka Amano":["surreal","fantasy","people","paint","colorful","old",],
+"Yoshitaka Amano":["surreal","fantasy","people","paint","colorful","old"],
 "Wes Anderson":["realistic","people","buildings","paint","colorful","new"],
 "Esao Andrews":["surreal","fantasy","people","creatures","buildings","paint","colorful","creepy"],
 "Giuseppe Arcimboldo":["surreal","objects","people","paint","colorful","old"],
-"John James Audubon":["realistic","creatures","nature","paint","colorful",],
+"John James Audubon":["realistic","creatures","nature","paint","colorful"],
 "Francis Bacon":["surreal","fantasy","creatures","paint","dull","creepy"],
 "Banksy":["realistic","people","paint","black and white","new"],
 "Jean-Michel Basquiat":["surreal","fantasy","creatures","paint","colorful","creepy"],
@@ -97,7 +97,7 @@
 "Rafal Olbinski":["surreal","people","nature","creatures","paint","colorful"],
 "Raffeaello Ossola":["realistic","nature","paint","dull"],
 "Adam Paquette":["surreal","fantasy","creatures","nature","paint","dull","creepy"],
-"Agnes Lawrence Pelton":["fantasy","nature","objects","paint","colorful","new"]
+"Agnes Lawrence Pelton":["fantasy","nature","objects","paint","colorful","new"],
 "Bruce Pennington":["surreal","fantasy","creatures","space","paint","colorful","old","creepy"],
 "Jackson Pollock":["abstract","paint","colorful"],
 "Gediminas Pranckevicius":["surreal","fantasy","creatures","nature","boats","paint","colorful","creepy"],
@@ -122,7 +122,7 @@
 "Ron Walotsky":["surreal","fantasy","people","creatures","space","paint","colorful","new"],
 "Andy Warhol":["realistic","people","paint","colorful","new"],
 "Liam Wong":["hyperrealistic","people","buildings","CGI","dull","new"],
-"Jacek Yerka":["surreal","creatures","nature","buildings","paint","dull",],
+"Jacek Yerka":["surreal","creatures","nature","buildings","paint","dull"],
 "Yuumei":["realistic","surreal","people","nature","buildings","paint","CGI","dull","new"],
 "Amir Zand":["realistic","people","nature","paint","dull"],
 "Laurel Burch":["realistic","cute","creatures","paint","colorful"],
@@ -149,14 +149,14 @@
 "Wayne Barlowe":["fantasy","creatures","paint","dull","creepy"],
 "John Bauer":["realistic","fantasy","people","creatures","paint","dull","old","creepy"],
 "Julie Bell":["realistic","surreal","fantasy","people","creatures","paint","dull","new","creepy"],
-"Hans Bellmer":["abstract","people",,"pencil","black and white"],
+"Hans Bellmer":["abstract","people","pencil","black and white"],
 "Mary Blair":["realistic","abstract","fantasy","cute","people","nature","buildings","paint","colorful","cartoon"],
 "William Blake":["religious","surreal","fantasy","people","paint","dull","old"],
 "Victor Brauner":["surreal","abstract","people","creatures","paint","colorful","old"],
 "Gaston Bussière":["realistic","people","nature","dull","old"],
 "Claude Cahun":["hyperrealistic","people","CGI","black and white","old"],
 "Clyde Caldwell":["surreal","fantasy","people","creatures","paint","colorful","creepy"],
-"Canaletto":["realistic","people","buildings","boats","paint","dull","old"]
+"Canaletto":["realistic","people","buildings","boats","paint","dull","old"],
 "Marcel Chagall":["realistic","surreal","people","creatures","paint","colorful"],
 "James C. Christensen":["realistic","surreal","people","nature","buildings","paint","dull","old"],
 "Mikalojus Konstantinas Ciurlionis":["realistic","nature","paint","dull"],
@@ -245,7 +245,5 @@
 "Jakub Rozalski":["realistic","fantasy","people","creatures","nature","paint","dull","old","creepy"],
 "Greg Rutkowski":["realistic","fantasy","people","creatures","buildings","boats","paint","dull","old","creepy"],
 "Mike Winkelmann":["surreal","fantasy","people","buildings","CGI","colorful","new"],
-"Seb McKinnon":["religious","surreal","fantasy","people","creatures","paint","CGI","dull","creepy"],
-},
-
-
+"Seb McKinnon":["religious","surreal","fantasy","people","creatures","paint","CGI","dull","creepy"]
+}

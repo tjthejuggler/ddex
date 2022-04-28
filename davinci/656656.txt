@@ -1,0 +1,2 @@
+["a big dog:9","by Joe Jusko:2"]
+["a big dog:9","by Asher Brown Durand:5"]
