@@ -1,4 +1,6 @@
 HATICE
+	find art styles that are not in promgen_styles.txt
+
 	find good gpt3 art where the artist also shared their prompt and add their prompts to the list in 
 		promgen_prompts.py
 
@@ -20,11 +22,6 @@ PROMPT GEN
 				user_prompt - 
 		extra descriptive - my prompt becomes more descriptive
 			possible prompt: what is an extremely descriptive way to say "a man running" in a single sentence?
-
-todo
-
-
-
 
 set up a100 with multiprompt code
 
