@@ -1,0 +1,2 @@
+["The bear is hunched over:9", "watching the lumberjack in his truck:7", "]
+["The bear growls:9", "	She plows through the hanging boughs as if they were butter:9", "She shakes off drool like water:9"]

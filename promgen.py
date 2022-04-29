@@ -57,10 +57,7 @@ def load_modifiers():
 	pre_prompts = prompts_file.readlines()
 	prompts_file.close()
 	artist_intros = ["in the style of","by","inspired by","resembling"]
-
 	return (styles, artists_dict, keywords, pre_prompts, artist_intros)
-
-
 
 def get_args():
 	user_input, batch_size , use_detail_description = 'a boy', 2, False
@@ -96,8 +93,8 @@ def get_args():
 			27 old
 			28 creepy (scary evil scary big animals)
 			29 cartoon
-
 			'''))
+
 	parser.add_argument("prompt", help="the base prompt (comma seperate each weighted section")
 	parser.add_argument("-b", "--batchsize", type = int, help="batch_size, the number of images")
 	parser.add_argument("-e", "--everycat", type = str, help="use every modifier in these categories")
@@ -113,7 +110,6 @@ def get_args():
 		only_categories_filter = [x for x in args.onlycat.split(",")]
 	if args.details:
 		use_detail_description = True
-
 	user_input = args.prompt
 	return (user_input, batch_size, every_categories_filter, only_categories_filter, use_detail_description)
 
@@ -141,21 +137,15 @@ def get_gpt_result(user_prompt, pre_prompts):
 	return result
 
 def get_task_result(user_prompt):
-	prompt = 'make this sentence very interesting and descriptive: "' + user_prompt + '" but only use one sentence.'
+	prompt = '''make these sentences very interesting and descriptive, but only use one sentence.\n
+	a man is running - a man running like the wind, his feet barely touching the ground.\n
+	'''+ user_prompt +' - '
 	response = openai.Completion.create(engine=engine, prompt=prompt, max_tokens=30, stop= "\n")
 	result = response["choices"][0]["text"].strip()
 	result = result.replace(',',(":"+rand_w()+'", "')).replace('.',(":"+rand_w()+'", "'))
 	return result
-#a function that is similar to the function above, but there are no pre_prompts and the result that it returns uses the
-#	following sentence:
-#		
-#make this sentence very interesting and descriptive: "a man is running", but only use one sentence.
-
-#return result at the end
 
 def create_output_file(filename, output_lines):
-	#print('creating output file', filename)
-	
 	folder_name = engine
 	with open(cwd+'/'+folder_name+'/'+filename + '.txt', 'w') as f:
 		for item in output_lines:
@@ -190,25 +180,23 @@ def main():
 	styles, artists_dict, keywords, pre_prompts, artist_intros = load_modifiers()
 	artist_intros = ["in the style of","by","inspired by","resembling"]
 	filtered_artists = list(artists_dict.keys())
-	print('fa',filtered_artists)
-	print(["house", "car"])
 	if every_categories_filter and only_categories_filter:
 		print("You can't use 'every' filter and 'only' filter together")
 		quit()
 	elif every_categories_filter:
 		filtered_artists = get_every_filter(artists_dict, every_categories_filter)
-		print(filtered_artists)
+		#print(filtered_artists)
 	elif only_categories_filter:
 		filtered_artists = get_only_filter(artists_dict, only_categories_filter)
-		print(filtered_artists)
+		#print(filtered_artists)
 	user_prompt = ''	
 	prompts = []
-	print('user_input', user_input) #a big dog,@
+	#print('user_input', user_input) #a big dog,@
 	for i in range(batch_size):#this will run once for each prompt it will create
 		prompt_to_append = ''
 		for section in user_input.split(","): #analyze 
 			section = section.replace('"', '')
-			print('section', section) # a big red dog  -------------- @
+			#print('section', section) # a big red dog  -------------- @
 
 			if len(prompt_to_append) > 1: #if we have already been through once, then make a ,
 				prompt_to_append = prompt_to_append + ","
@@ -228,9 +216,10 @@ def main():
 					result = ""
 					if use_detail_description: 
 						result = get_task_result(user_prompt)
+						prompt_to_append = prompt_to_append + ' ' + result
 					else:
 						result = get_gpt_result(user_prompt, pre_prompts)
-					prompt_to_append = prompt_to_append + user_prompt+' '+result
+						prompt_to_append = prompt_to_append + user_prompt+' '+result
 					if section[-1] == ":":
 						prompt_to_append = prompt_to_append + ":"+rand_w()
 					prompt_to_append = prompt_to_append + ":"+rand_w()+'"'
@@ -251,6 +240,7 @@ def main():
 		print('prompt_to_append', prompt_to_append)
 		prompt_to_append = prompt_to_append.replace('""', '"').replace('" ', '"')
 		prompt_to_append = re.sub(' +', ' ', prompt_to_append).replace(" ,]", "]")
+
 		prompt_to_append = re.sub('":\d+','', prompt_to_append)
 		prompt_to_append = re.sub('", :\d+','", ', prompt_to_append)
 		prompt_to_append = prompt_to_append.replace('", ","', ", ")
@@ -261,6 +251,8 @@ def main():
 		prompts.append(prompt_to_append)
 	create_output_file(user_prompt.replace(' ', '_')+str(random.randint(0,1000000)), prompts)
 	for item in prompts:
+		if item.endswith(', "'):
+			item = item.split(', "')[0]
 		print("["+item.replace('""','"')+"],")
 
 main()

@@ -1,0 +1,2 @@
+["the man is running Can you do it? Go on:3", "try it:3", "My recommendations are that it should be short:3", "short sentences (one sentence):3", "I forgot to summarize:9"]
+["the man is running This will not only make you have to pay close attention to the topic of the word group but also help you with summarization:3", "]
