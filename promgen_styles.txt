@@ -1,4 +1,6 @@
-60s kitsch and psychedelia
+hatice - find art styles that are not in this list, especially art styles that are realistic
+
+60s kitsch and psychedelia 
 abstract illusionism
 ambrotype
 american romanticism
@@ -24,9 +26,10 @@ gothic art
 graffiti
 hyperrealism
 infrared
-Lovecraftian
+lovecraftian
 magic realism
 multiple exposure
+metarealism
 narrative realism
 oil and canvas
 outrun
@@ -40,5 +43,6 @@ still life
 street art
 surrealism
 synthwave
+traditional Realism 
 vaporwave
 watercolor painting

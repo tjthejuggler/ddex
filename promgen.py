@@ -7,26 +7,16 @@ import re
 import os
 import textwrap
 
-# DD
-# ["hatice is a very attractive person and very sociable:3", "if you are interested go for it:3", "who knows?:9"], 
-# ["hatice is a very sweet girl:7", "dress and caresses like dolls:7", "always returns a sign:2"]
+#if the user runs promgen.py with the argument (python3 promgen.py -d) ((for detailed description))
+#	then we want to use our ai to make a more descriptive prompt then what the user gave
+#	python3 promgen.py "hatice is very>" --------  hatice is very good at being an amazing person
+#   python3 promgen.py "hatice ran fast" --------  
 
-# CD
 
-#              first image              second image
-# DD format - ["cat","yellow and red"],["dog","green"]
 
-#               first image            second image
-# CD format - ["cat, yellow and red", "dog, green"]
+#right now if the user does -e or -o then they need to follow this format (-e 3,4,5) (-o 2,3,4),
+#	make it so they can use numbers or the words, for example (-e religious,realistic) = (-e 2,4)
 
-#bugs
-#"a big dog:9,@:3"
-#["a big dog:9","by Diego Velázquez9,@"],
-#["a big dog:9","by Diego Velázquez:3"],
-
-#"hatice is a very,@"
-#[hatice is a very,@,"by Adam Paquette"],
-#["hatice is a very","by Adam Paquette"],
 
 
 cwd = os.getcwd() #
@@ -48,10 +38,10 @@ category_keys = {
 			}
 
 def load_modifiers():
-	styles_file = open( "prompgen_styles.txt", "r")
+	styles_file = open( "promgen_styles.txt", "r")
 	styles = styles_file.readlines()
 	styles_file.close()
-	artists_file = open( "prompgen_artists.txt", "r")
+	artists_file = open( "promgen_artists.txt", "r")
 	artists = artists_file.readlines()
 	artists_file.close()
 	artists_dict = {}
@@ -60,10 +50,10 @@ def load_modifiers():
 		print('file exists')		
 		with open('./promgen_artists_formatted.txt') as json_file:
 			artists_dict = json.load(json_file)
-	keywords_file = open( "prompgen_keywords.txt", "r")
+	keywords_file = open( "promgen_keywords.txt", "r")
 	keywords = keywords_file.readlines()
 	keywords_file.close()
-	prompts_file = open( "prompgen_prompts.txt", "r")
+	prompts_file = open( "promgen_prompts.txt", "r")
 	pre_prompts = prompts_file.readlines()
 	prompts_file.close()
 	artist_intros = ["in the style of","by","inspired by","resembling"]
@@ -144,6 +134,13 @@ def get_gpt_result(user_prompt, pre_prompts):
 	result = result.replace(',',(":"+rand_w()+'", "')).replace('.',(":"+rand_w()+'", "'))
 	return result
 
+#a function that is similar to the function above, but there are no pre_prompts and the result that it returns uses the
+#	following sentence:
+#		
+#make this sentence very interesting and descriptive: "a man is running", but only use one sentence.
+
+#return result at the end
+
 def create_output_file(filename, output_lines):
 	#print('creating output file', filename)
 	
@@ -177,7 +174,7 @@ def get_only_filter(artists_dict, filter_list):
 
 def main():
 	user_input, batch_size, every_categories_filter, only_categories_filter = get_args()
-	styles_file = open( "prompgen_styles.txt", "r")
+	styles_file = open( "promgen_styles.txt", "r")
 	styles, artists_dict, keywords, pre_prompts, artist_intros = load_modifiers()
 	artist_intros = ["in the style of","by","inspired by","resembling"]
 	filtered_artists = list(artists_dict.keys())
