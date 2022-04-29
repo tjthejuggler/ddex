@@ -245,5 +245,22 @@
 "Jakub Rozalski":["realistic","fantasy","people","creatures","nature","paint","dull","old","creepy"],
 "Greg Rutkowski":["realistic","fantasy","people","creatures","buildings","boats","paint","dull","old","creepy"],
 "Mike Winkelmann":["surreal","fantasy","people","buildings","CGI","colorful","new"],
-"Seb McKinnon":["religious","surreal","fantasy","people","creatures","paint","CGI","dull","creepy"]
+"Seb McKinnon":["religious","surreal","fantasy","people","creatures","paint","CGI","dull","creepy"],
+"Mario Martinez":["surreal","abstract","cute","paint","colorful"]
+"Daniel Merriam":[4,7,9,10,12,17,20,28],
+"sylvain sarrailh":[4,7,8,9,11,12,18,20,26,29],
+"Tom Lovell":[4,9,11,17,21,27],
+"Haddon Sundblom":[4,9,17,21,27],
+"H.R. Giger":[4,10,16,21,28],
+"Zdzislaw Beksinski":[5,9,17,21,28],
+"Eddie Mendoza":[4,7.9,11,12,18,21,26],
+"Philipp Urlich":[4,7,10,11,18,21,28],
+"Eugeniusz Zak":[4,9,17,20,27],
+"Taro Okamoto":[6,20], 
+"Gal Barkan":[],
+"":[],
+"":[],
+"":[],
+"":[],
+"":[],
 }

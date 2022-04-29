@@ -7,3 +7,4 @@
 5/27   1.5 hours
 5/27-28 1 hour programming together
 5/29   1.5 create detail prompt function
+5/29   1.5 finding prompts and artists
