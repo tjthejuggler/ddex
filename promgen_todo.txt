@@ -1,10 +1,8 @@
+HATICE
+	find good gpt3 art where the artist also shared their prompt and add their prompts to the list in 
+		promgen_prompts.py
+
 PROMPT GEN
-	this should be able to output in a format that works well for CD
-		not a high priority because we can bypass the CD specific input and just use DD style
-
-	figure out exactly what that weight bug is, i think i am unable to give a prompt>:9 and keep that 9 there
-
-
 	fill prompt and artist files
 		randomly choose some number of them (a different number of them for each generated prompts)
 	get artists and prompts from files, 
@@ -29,8 +27,6 @@ todo
 
 
 set up a100 with multiprompt code
-
-get lots of great prompts
 
 hook colab export directly to local dir to save time
 
