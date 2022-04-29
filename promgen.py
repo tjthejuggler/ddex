@@ -60,8 +60,10 @@ def load_modifiers():
 
 	return (styles, artists_dict, keywords, pre_prompts, artist_intros)
 
+
+
 def get_args():
-	user_input, batch_size = 'a boy', 2
+	user_input, batch_size , use_detail_description = 'a boy', 2, False
 	every_categories_filter, only_categories_filter = [], []
 	parser = argparse.ArgumentParser(	    
 		prog='PROG',
@@ -100,6 +102,7 @@ def get_args():
 	parser.add_argument("-b", "--batchsize", type = int, help="batch_size, the number of images")
 	parser.add_argument("-e", "--everycat", type = str, help="use every modifier in these categories")
 	parser.add_argument("-o", "--onlycat", type = str, help="use only modifiers that have all these categories")
+	parser.add_argument("-d", "--details", action = "store_true", help="ai makes detail description")
 
 	args = parser.parse_args()
 	if args.batchsize:
@@ -108,8 +111,11 @@ def get_args():
 		every_categories_filter = [x for x in args.everycat.split(",")]
 	if args.onlycat:
 		only_categories_filter = [x for x in args.onlycat.split(",")]
+	if args.details:
+		use_detail_description = True
+
 	user_input = args.prompt
-	return (user_input, batch_size, every_categories_filter, only_categories_filter)
+	return (user_input, batch_size, every_categories_filter, only_categories_filter, use_detail_description)
 
 def rand_item(my_list, is_artist):
 	intro = ''
@@ -134,6 +140,12 @@ def get_gpt_result(user_prompt, pre_prompts):
 	result = result.replace(',',(":"+rand_w()+'", "')).replace('.',(":"+rand_w()+'", "'))
 	return result
 
+def get_task_result(user_prompt):
+	prompt = 'make this sentence very interesting and descriptive: "' + user_prompt + '" but only use one sentence.'
+	response = openai.Completion.create(engine=engine, prompt=prompt, max_tokens=30, stop= "\n")
+	result = response["choices"][0]["text"].strip()
+	result = result.replace(',',(":"+rand_w()+'", "')).replace('.',(":"+rand_w()+'", "'))
+	return result
 #a function that is similar to the function above, but there are no pre_prompts and the result that it returns uses the
 #	following sentence:
 #		
@@ -173,7 +185,7 @@ def get_only_filter(artists_dict, filter_list):
 	return listOfKeys
 
 def main():
-	user_input, batch_size, every_categories_filter, only_categories_filter = get_args()
+	user_input, batch_size, every_categories_filter, only_categories_filter, use_detail_description = get_args()
 	styles_file = open( "promgen_styles.txt", "r")
 	styles, artists_dict, keywords, pre_prompts, artist_intros = load_modifiers()
 	artist_intros = ["in the style of","by","inspired by","resembling"]
@@ -213,7 +225,11 @@ def main():
 			else:
 				if ">" in section and section[0] != ">":
 					user_prompt = section.split(">")[0]
-					result = get_gpt_result(user_prompt, pre_prompts)
+					result = ""
+					if use_detail_description: 
+						result = get_task_result(user_prompt)
+					else:
+						result = get_gpt_result(user_prompt, pre_prompts)
 					prompt_to_append = prompt_to_append + user_prompt+' '+result
 					if section[-1] == ":":
 						prompt_to_append = prompt_to_append + ":"+rand_w()
