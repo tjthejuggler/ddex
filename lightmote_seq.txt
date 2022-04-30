@@ -1,0 +1,28 @@
+todo:
+
+me:
+	create new github repo
+	make todo list for hatice
+
+hatice:
+	clone this repo https://github.com/tjthejuggler/lightmote_seq
+	copy the contents of this(litemote_seq.txt) file into a todo.txt file in the lightmote_seq repo
+	download an mp3 and put it into the project folder
+	in main.py
+		play the .mp3 file with python code
+		download another .mp3
+		make an argument that allows the user to name one of the .mp3 files and make it play automatically
+		check to see which OS is being using
+		it allows for keyboard input (msvcrt for windows, getch for linux)
+			(it is possibly better to use tkinter instead of msvcrt/getch)
+			dont play the song file until the first keypress
+			hook up a keypress to pause the song
+			translates that keyboard input into lists which are associated with timestamps in a dict
+				row 1 - ball 1
+				row q - ball 2
+				row a - ball 3
+				row z - ball 4
+					as we go across the row we have different rgb colors
+						[255,0,0],[255,255,0],[0,255,0],[0,255,255].... (actually we will have more partial colors in beteen these)
+		output is a text file json
+			the same as the promgen_artists_formatted.txt
