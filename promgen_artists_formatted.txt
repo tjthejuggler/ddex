@@ -246,7 +246,7 @@
 "Greg Rutkowski":["realistic","fantasy","people","creatures","buildings","boats","paint","dull","old","creepy"],
 "Mike Winkelmann":["surreal","fantasy","people","buildings","CGI","colorful","new"],
 "Seb McKinnon":["religious","surreal","fantasy","people","creatures","paint","CGI","dull","creepy"],
-"Mario Martinez":["surreal","abstract","cute","paint","colorful"]
+"Mario Martinez":["surreal","abstract","cute","paint","colorful"],
 "Daniel Merriam":[4,7,9,10,12,17,20,28],
 "sylvain sarrailh":[4,7,8,9,11,12,18,20,26,29],
 "Tom Lovell":[4,9,11,17,21,27],
