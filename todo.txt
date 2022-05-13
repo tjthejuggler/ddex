@@ -1,4 +1,7 @@
-
+may 12
+	make a image tkinter window
+	make none of the 3 winds overlap when the program is loaded
+	increase settings text size
 
 make data show when listbox item entered
 #i should be able to see everything else about the file when i click on it
@@ -16,3 +19,16 @@ when dropdown item is selected, check to see if that item in sample is true/fals
 a way to search for images that only have N modifiers
 
 a way to explore animations
+
+make something like anim.py, but instead of putting the same amount of time between each one it takes a format like this
+	seconds prompt
+	3 cat walking
+	8 happy dog running
+	...
+		and applies a multiplier to each of them and gives a format that either works of centipede or disco
+
+add the new with the band video to obsidian notes and 
+	note down how many seconds before each audio cue we put the prompt timestamp
+	the minimum distance between prompts we can have
+
+

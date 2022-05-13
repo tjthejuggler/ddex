@@ -4,7 +4,8 @@ import json #deals with json files
 import tkinter as tk #to create GUIs(Graphical User Interfaces) in python
 from os.path import exists #file locations and directories
 from profanity_filter import ProfanityFilter #used censoring
-from PIL import Image #show images
+from PIL import ImageTk, Image
+
 
 def build_image_catalog():
 	pf = ProfanityFilter()  #set up our sensor(to maybe be used later)
@@ -58,10 +59,6 @@ class ExampleApp(tk.Tk):
 			path_of_currently_selected_item = self.images_path_list[index_of_selected_item]
 			im = Image.open(path_of_currently_selected_item)
 			im.show()
-			self.data.configure(state="normal")
-			self.data.delete('1.0', tk.END)
-			self.data.insert("end", "test")
-			self.data.configure(state="disabled")
 
 		def update_main_prompt_list(*args): #filters our image list based on the users entry
 			self.images_listbox.delete(0, tk.END)
@@ -87,24 +84,74 @@ class ExampleApp(tk.Tk):
 		def click_postdata_save(*args):	
 			print('click_postdata_save')
 
+		def expandToBound(image_width, image_height):
+			bounding_width = 840
+			bounding_height = 670
+			width_scale = 0
+			height_scale = 0
+
+			width_scale = bounding_width / image_width
+			height_scale = bounding_height / image_height 
+
+			scale = min(width_scale, height_scale)
+
+			new_width, new_height = int(image_width * scale), int(image_height * scale)
+			return new_width, new_height
+		
+
+		def image_highlighted_by_user(*args):
+			full_path = self.images_path_list[self.images_listbox.curselection()[0]]
+			filename = os.path.basename(full_path)
+			print("filename",filename)
+			directory_only = full_path.split(filename)[0]
+			settings_file_name = filename.split('_')[0] + "_settings.txt"
+			print('directory_only+settings_file_name', directory_only+settings_file_name)
+			with open(directory_only+settings_file_name, 'r') as f:
+				text_file_contents = f.read()
+			self.data.configure(state="normal")
+			self.data.delete(1.0, tk.END)
+			self.data.insert(tk.END, full_path)
+			self.data.insert(tk.END, text_file_contents)
+			self.data.configure(state="disabled")
+			self.image_for_coords = ImageTk.Image.open(full_path)
+			self.image_for_coords_width, self.image_for_coords_height = self.image_for_coords.size
+			self.original = Image.open(full_path)
+			self.new_width, self.new_height = expandToBound(self.image_for_coords_width, self.image_for_coords_height)
+			self.resized = self.original.resize((self.new_width, self.new_height),Image.ANTIALIAS)
+			self.img = ImageTk.PhotoImage(self.resized)
+			# self.resized = self.img.resize((800, 600),Image.ANTIALIAS)
+			self.imglabel.configure(image=self.img)
+			self.imglabel.image = self.img
+
+
+
+		# Create a Label Widget to display the text or Image
+			#self.imglabel = tk.Label(self.frame, image = self.img)
+			#print()
+
 		self.images_path_list = []   
 		self.image_prompts_list = []
 		tk.Tk.__init__(self) #required thing for making a tkinter GUI
 
+
 		#widget that shows prompt/image list
 		image_prompts_list_variable = tk.StringVar(value=())
-		self.images_listbox = tk.Listbox(self, listvariable=image_prompts_list_variable, width=400, height=10, selectmode='extended')
+		self.images_listbox = tk.Listbox(self, listvariable=image_prompts_list_variable, width=400, height=18)
 		self.images_listbox.pack(fill="both", expand=True)
 		self.images_listbox.bind("<Return>", image_chosen_by_user)
-		self.images_listbox.bind('<Double-Button>', image_chosen_by_user)
+		self.images_listbox.bind('<Double-Button-1>', image_chosen_by_user)
+		self.images_listbox.bind('<<ListboxSelect>>', image_highlighted_by_user)
 
 		self.users_search_text = tk.StringVar()
 		self.users_search_text.trace_add('write', update_main_prompt_list) #'update_main_prompt_list' gets run whenever the users_search_text entry changes 
 		self.user_entry = tk.Entry(self, bd =5, textvariable=self.users_search_text) #actually create our entry
 		self.user_entry.pack(side="bottom", fill="x") #add our entry to our tkinter window
 		
+
+
 		self.data_window= tk.Toplevel(self) #require tkinter line
-		self.data = tk.Text(self.data_window, wrap="word", width=400, height=25, cursor="xterm #0000FF")
+		self.data_window.geometry('1000x670+0+320')
+		self.data = tk.Text(self.data_window, wrap="word", width=400, height=25)
 		self.data.pack(side="top", fill="x")
 		
 		self.data_reset = tk.Button(self.data_window, text="data reset", command=click_data_reset)#maybe getting rid of self. fixed this, test print
@@ -122,12 +169,39 @@ class ExampleApp(tk.Tk):
 		self.postdata_save = tk.Button(self.data_window, text="postdata save", command=click_postdata_save)
 		self.postdata_save.pack(side="top", fill="x")
 
+
+
+		self.image_window= tk.Toplevel(self) #require tkinter line
+		self.image_window.geometry('840x670+1075+320')
+		#image1 = Image.open("<path/image_name>")
+		self.frame = tk.Frame(self.image_window, width=840, height=670)
+		self.frame.pack()
+		self.frame.place(anchor='center', relx=0.5, rely=0.5)
+
+		self.img = ImageTk.PhotoImage(Image.open("./directories/DiscoTime/images_out/A100/DiscoTime(10)_0000.png"))
+
+		# Create a Label Widget to display the text or Image
+		self.imglabel = tk.Label(self.frame, image = self.img)
+		self.imglabel.pack()
+
+		# self.image1 = Image.open("./directories/DiscoTime/images_out/A100/DiscoTime(10)_0000.png")
+		# self.test = tk.PhotoImage(self.image1)
+
+		# self.label1 = tk.Label(self.image_window)
+		# self.label1.image = self.test
+
+		# # Position image
+		# self.label1.place(x=0, y=0)
+
+		#get this image to be shown in the image window
+
 		update_main_prompt_list()
 
 if __name__ == "__main__":
 	image_data_objects = build_image_catalog()
 	print("Count:", len(image_data_objects)) #show us how many images we are able to use
 	app = ExampleApp(image_data_objects)
+
 	app.mainloop()
 
 # #this needs worked on
