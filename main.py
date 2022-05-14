@@ -5,18 +5,41 @@ import tkinter as tk #to create GUIs(Graphical User Interfaces) in python
 from os.path import exists #file locations and directories
 from profanity_filter import ProfanityFilter #used censoring
 from PIL import ImageTk, Image
+import argparse
+import subprocess
+#import imageio
+import numpy as np
+import cv2
 
 
-def build_image_catalog():
+
+def get_args():
+	filetype = 'image'
+	parser = argparse.ArgumentParser()
+	parser.add_argument("-a", "--animation", action="store_true",help="skip confirmation prompt")
+	args = parser.parse_args()
+	if args.animation:
+		filetype = 'animation'
+	return filetype
+
+def build_image_catalog(filetype):
 	pf = ProfanityFilter()  #set up our sensor(to maybe be used later)
 	censored = False
+	fileExt = '.png'
+	if filetype == 'animation':
+		fileExt = '.mp4'
 	directory = './directories' #tells us where our images and settings(jsons) files are
 	image_data_objects = [] #empty list
 	for subdir, dirs, files in os.walk(directory): #looping through every folder and every file in ./directories
 		for filename in files: #we do the following things to every file it finds
 			this_path_to_the_file = os.path.join(subdir, filename) # set the file path to a text variable
 			settings_file_name = filename.split('_')[0] + "_settings.txt"
-			if filename.endswith(".png") and exists(this_path_to_the_file.split(filename)[0]+settings_file_name):	#check to see if this file in an image(png) and if it has a settings txt file		
+			if filetype == 'animation':
+				settings_file_name = filename[:-4] + "_settings.txt"
+			if filename.endswith(fileExt):	#check to see if this file in an image(png) and if it has a settings txt file		
+				print(filename, this_path_to_the_file.split(filename)[0]+settings_file_name)
+			if filename.endswith(fileExt) and exists(this_path_to_the_file.split(filename)[0]+settings_file_name):	#check to see if this file in an image(png) and if it has a settings txt file		
+				print(filename)
 				#if both these conditions are met, then we continue, if not we move on to the next file
 				with open(this_path_to_the_file.split(filename)[0]+settings_file_name, 'r') as f: #we open the text(settings/json) file
 					use_this_image = True #we are going to add this image to our app
@@ -53,12 +76,19 @@ def get_filtered_images(user_input, image_data_objects): #goes through all the t
 
 #design our GUI(graphical user interface)
 class ExampleApp(tk.Tk):
-	def __init__(self, image_data_objects):
+	def __init__(self, image_data_objects, filetype):
 		def image_chosen_by_user(*args):
 			index_of_selected_item = self.images_listbox.curselection()[0]
 			path_of_currently_selected_item = self.images_path_list[index_of_selected_item]
-			im = Image.open(path_of_currently_selected_item)
-			im.show()
+			print('filetype',filetype)
+			if filetype == 'image':
+				im = Image.open(path_of_currently_selected_item)
+				im.show()
+			if filetype == 'animation':
+				subprocess.call(["xdg-open", path_of_currently_selected_item])
+				
+				#todo show thumbnail
+				#	https://stackoverflow.com/questions/38767240/how-to-show-a-frame-of-a-video-file-image-with-tkinter-in-python
 
 		def update_main_prompt_list(*args): #filters our image list based on the users entry
 			self.images_listbox.delete(0, tk.END)
@@ -99,12 +129,14 @@ class ExampleApp(tk.Tk):
 			return new_width, new_height
 		
 
-		def image_highlighted_by_user(*args):
+		def image_highlighted_by_user(*args): #we need to have a way to get filetype into here
 			full_path = self.images_path_list[self.images_listbox.curselection()[0]]
 			filename = os.path.basename(full_path)
 			print("filename",filename)
 			directory_only = full_path.split(filename)[0]
 			settings_file_name = filename.split('_')[0] + "_settings.txt"
+			if filetype == 'animation':
+				settings_file_name = filename[:-4] + "_settings.txt"
 			print('directory_only+settings_file_name', directory_only+settings_file_name)
 			with open(directory_only+settings_file_name, 'r') as f:
 				text_file_contents = f.read()
@@ -113,15 +145,32 @@ class ExampleApp(tk.Tk):
 			self.data.insert(tk.END, full_path)
 			self.data.insert(tk.END, text_file_contents)
 			self.data.configure(state="disabled")
-			self.image_for_coords = ImageTk.Image.open(full_path)
-			self.image_for_coords_width, self.image_for_coords_height = self.image_for_coords.size
-			self.original = Image.open(full_path)
-			self.new_width, self.new_height = expandToBound(self.image_for_coords_width, self.image_for_coords_height)
-			self.resized = self.original.resize((self.new_width, self.new_height),Image.ANTIALIAS)
-			self.img = ImageTk.PhotoImage(self.resized)
-			# self.resized = self.img.resize((800, 600),Image.ANTIALIAS)
-			self.imglabel.configure(image=self.img)
-			self.imglabel.image = self.img
+			self.image_for_coords = None
+			self.original = None
+			print('self.images_listbox.curselection()',self.images_listbox.curselection())
+			print('self.images_path_list', self.images_path_list)
+			if filetype == 'animation':
+				print('full_path', full_path)
+				cap = cv2.VideoCapture(full_path)
+				cap.set(0,16);
+				cv2image= cv2.cvtColor(cap.read()[1],cv2.COLOR_BGR2RGB)
+				img = Image.fromarray(cv2image)
+				self.imgtk = ImageTk.PhotoImage(image = img)
+				self.imglabel.image = self.imgtk
+				self.imglabel.configure(image=self.imgtk)
+				self.video_thumbnail = frame
+				self.image_for_coords = self.video_thumbnail
+				self.original = self.video_thumbnail
+			else:
+				self.image_for_coords = ImageTk.Image.open(full_path)
+				self.original = Image.open(full_path)
+				self.image_for_coords_width, self.image_for_coords_height = self.image_for_coords.size			
+				self.new_width, self.new_height = expandToBound(self.image_for_coords_width, self.image_for_coords_height)
+				self.resized = self.original.resize((self.new_width, self.new_height),Image.ANTIALIAS)
+				self.img = ImageTk.PhotoImage(self.resized)
+				# self.resized = self.img.resize((800, 600),Image.ANTIALIAS)
+				self.imglabel.configure(image=self.img)
+				self.imglabel.image = self.img
 
 		self.images_path_list = []   
 		self.image_prompts_list = []
@@ -175,8 +224,9 @@ class ExampleApp(tk.Tk):
 		update_main_prompt_list()
 
 if __name__ == "__main__":
-	image_data_objects = build_image_catalog()
+	filetype = get_args()
+	image_data_objects = build_image_catalog(filetype)
 	print("Count:", len(image_data_objects)) #show us how many images we are able to use
-	app = ExampleApp(image_data_objects)
+	app = ExampleApp(image_data_objects, filetype)
 
 	app.mainloop()
