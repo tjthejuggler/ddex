@@ -1,7 +1,6 @@
 may 12
-	make a image tkinter window
-	make none of the 3 winds overlap when the program is loaded
 	increase settings text size
+	consolidate notes on how to make a version of this for animations
 
 make data show when listbox item entered
 #i should be able to see everything else about the file when i click on it

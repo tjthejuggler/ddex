@@ -123,16 +123,9 @@ class ExampleApp(tk.Tk):
 			self.imglabel.configure(image=self.img)
 			self.imglabel.image = self.img
 
-
-
-		# Create a Label Widget to display the text or Image
-			#self.imglabel = tk.Label(self.frame, image = self.img)
-			#print()
-
 		self.images_path_list = []   
 		self.image_prompts_list = []
 		tk.Tk.__init__(self) #required thing for making a tkinter GUI
-
 
 		#widget that shows prompt/image list
 		image_prompts_list_variable = tk.StringVar(value=())
@@ -146,12 +139,10 @@ class ExampleApp(tk.Tk):
 		self.users_search_text.trace_add('write', update_main_prompt_list) #'update_main_prompt_list' gets run whenever the users_search_text entry changes 
 		self.user_entry = tk.Entry(self, bd =5, textvariable=self.users_search_text) #actually create our entry
 		self.user_entry.pack(side="bottom", fill="x") #add our entry to our tkinter window
-		
-
 
 		self.data_window= tk.Toplevel(self) #require tkinter line
 		self.data_window.geometry('1000x670+0+320')
-		self.data = tk.Text(self.data_window, wrap="word", width=400, height=25)
+		self.data = tk.Text(self.data_window, wrap="word", width=400, height=25, font=('Times New Roman',15))
 		self.data.pack(side="top", fill="x")
 		
 		self.data_reset = tk.Button(self.data_window, text="data reset", command=click_data_reset)#maybe getting rid of self. fixed this, test print
@@ -169,31 +160,17 @@ class ExampleApp(tk.Tk):
 		self.postdata_save = tk.Button(self.data_window, text="postdata save", command=click_postdata_save)
 		self.postdata_save.pack(side="top", fill="x")
 
-
-
 		self.image_window= tk.Toplevel(self) #require tkinter line
 		self.image_window.geometry('840x670+1075+320')
-		#image1 = Image.open("<path/image_name>")
+
 		self.frame = tk.Frame(self.image_window, width=840, height=670)
 		self.frame.pack()
 		self.frame.place(anchor='center', relx=0.5, rely=0.5)
 
 		self.img = ImageTk.PhotoImage(Image.open("./directories/DiscoTime/images_out/A100/DiscoTime(10)_0000.png"))
 
-		# Create a Label Widget to display the text or Image
 		self.imglabel = tk.Label(self.frame, image = self.img)
 		self.imglabel.pack()
-
-		# self.image1 = Image.open("./directories/DiscoTime/images_out/A100/DiscoTime(10)_0000.png")
-		# self.test = tk.PhotoImage(self.image1)
-
-		# self.label1 = tk.Label(self.image_window)
-		# self.label1.image = self.test
-
-		# # Position image
-		# self.label1.place(x=0, y=0)
-
-		#get this image to be shown in the image window
 
 		update_main_prompt_list()
 
@@ -203,22 +180,3 @@ if __name__ == "__main__":
 	app = ExampleApp(image_data_objects)
 
 	app.mainloop()
-
-# #this needs worked on
-# 	my_option_menu.configure(window, user_choice, *updated_list)
-
-# from tkinter import *
-
-# search_options = [list(myDict.keys())] #etc
-
-# master = Tk()
-
-# variable = StringVar(master)
-# variable.set(search_options[0]) # default value
-
-# w = OptionMenu(master, variable, *search_options)
-# w.pack()
-
-
-#mainloop()
-
