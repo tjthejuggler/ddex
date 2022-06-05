@@ -1,18 +1,39 @@
+may 12
+	stretch animation thumbnails
+	get animations in tkinter to play automatically on loop
+	consolidate notes on how to make a version of this for animations
+
+animation
+	make a way to make it for images or videos
+		maybe an argument - but then i cant see images and videos together that have the same prompts
+		make a toggle or filter
+	here is the way to show video
+		https://stackoverflow.com/questions/36635567/tkinter-inserting-video-into-window
 
 
-make data show when listbox item entered
-#i should be able to see everything else about the file when i click on it
-	the settings json and my rating json
-a way to add data to images(ratings..)
+a way to add data to images(ratings..) so i can at least easily mark my favorites
 	a seperate json is probably the solution
 
-when dropdown item is selected, check to see if that item in sample is true/false, a number, or a string and set type of
-	filtering / input accordingly
+Filter
+	when dropdown item is selected, check to see if that item in sample is true/false, a number, or a string and set type of
+		filtering / input accordingly
 
-#make search field selectable
-	#dropdown that is full of all keys
-		#if it is number, then we should accept ranges (30 - 50 should work
+	#make search field selectable
+		#dropdown that is full of all keys
+			#if it is number, then we should accept ranges (30 - 50 should work
 
-a way to search for images that only have N modifiers
+	a way to search for images that only have N modifiers
 
-a way to explore animations
+
+make something like anim.py, but instead of putting the same amount of time between each one it takes a format like this
+	seconds prompt
+	3 cat walking
+	8 happy dog running
+	...
+		and applies a multiplier to each of them and gives a format that either works of centipede or disco
+
+add the new with the band video to obsidian notes and 
+	note down how many seconds before each audio cue we put the prompt timestamp
+	the minimum distance between prompts we can have
+
+
