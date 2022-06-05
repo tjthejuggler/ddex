@@ -3,7 +3,7 @@
 5/23   1 hour art 
 5/24   2 hour art 
 5/26   1.5 hour art
-5/26   40 min art
+5/26   1 hour art
 5/27   1.5 hours
 5/27-28 1 hour programming together
 5/29   1.5 create detail prompt function
@@ -12,7 +12,16 @@
 5/30   .5 hours programming
 5/31   5.5 hours programming
 5/02   2.5 hours programming
-5/03   4.5+20 min hours programming
+5/03   4.5 min hours programming
 5/04   3.5 hours programming
 5/05   4 hours programming
-5/06	4.5 hours programming
+5/06   4.5 hours programming
+5/07   2.5 hours programming
+5/11   1.5 hours programming
+5/12   6 hours programming
+5/13   5.40 hours programming
+5/14   4 hours programming
+5/15   1 hour programming
+5/19   1.45 min programming
+5/21   2 hours programming
+5/30   40min setting VS for android app
